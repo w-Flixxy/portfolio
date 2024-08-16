@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
-<body>
+<body class="dark-mode"> <!-- Default to dark mode -->
     <header>
         <div class="container">
             <h1>Flixxy</h1>
@@ -21,7 +21,7 @@
                 </ul>
             </nav>
             <button id="theme-toggle">
-                🌙
+                <img id="theme-icon" src="sun.png" alt="Theme Toggle">
             </button>
         </div>
     </header>
@@ -38,15 +38,15 @@
             <h2>Projects</h2>
             <div class="project-grid">
                 <a href="https://github.com/w-Flixxy/T-Security" class="project-card" target="_blank">
-                    <img src="project1.png" alt="T-Security">
+                    <h3>T-Security</h3>
                     <p>T-Security is a Discord bot that prevents raids and has moderation commands.</p>
                 </a>
                 <a href="https://github.com/w-Flixxy/Andrei-s-Helper" class="project-card" target="_blank">
-                    <img src="project2.png" alt="Andrei's Helper">
+                    <h3>Andrei's Helper</h3>
                     <p>Andrei's Helper is a Discord bot; a client requested a lightweight moderation bot.</p>
                 </a>
                 <a href="https://github.com/w-Flixxy/IP-Lookup" class="project-card" target="_blank">
-                    <img src="project3.png" alt="IP-Lookup">
+                    <h3>IP-Lookup</h3>
                     <p>A tool with a UI that utilizes an API to get information about an IP address.</p>
                 </a>
             </div>
@@ -64,7 +64,7 @@
                     <h3>Discord.py</h3>
                 </div>
                 <div class="skill-card">
-                    <h3>CustomTKinter</h3>
+                    <h3>TKinter</h3>
                 </div>
                 <div class="skill-card">
                     <h3>HTML (learning)</h3>
@@ -76,20 +76,57 @@
         </div>
     </section>
 
+    <section id="services" class="services">
+        <div class="container">
+            <h2>Services</h2>
+            <div class="services-grid">
+                <a class="project-card">
+                    <h3>Custom Discord Bots</h3>
+                    <p>Personalized Discord bots for your server</p>
+                    <p><b>Pricing:</b></p>
+                    <ul>
+                        <li>Simple Discord Bot: €10-€50 (1-5 Features)</li>
+                        <li>Intermediate Bot: €50-€100 (5-15 Features)</li>
+                        <li>Full Bot: €100+ (∞ features)</li>
+                    </ul>
+                    <p><b>PRICE ALWAYS NEGOTIABLE</b></p>
+                </a>
+            </div>
+        </div>
+    </section>
+    
     <section id="contact" class="contact">
         <div class="container">
             <h2>Contact</h2>
-            <p>Feel free to reach out to me through any of the platforms below:</p>
-            <ul class="contact-list">
-                <li>Discord: flxxy.</li>
-                <li>GitHub: github.com/W-Flixxy</li>
-            </ul>
+            <div class="contact-card project-card"> <!-- Use the project-card class for consistency -->
+                <p>Feel free to reach out to me through any of the platforms below:</p>
+                <ul class="contact-list">
+                    <li>Discord: flxxy.</li>
+                    <li>GitHub: github.com/W-Flixxy</li>
+                </ul>
+            </div>
         </div>
     </section>
+    
     <script>
         const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+
+        // Function to set the theme based on the preference
+        function setTheme(theme) {
+            document.body.classList.toggle('dark-mode', theme === 'dark');
+            themeIcon.src = theme === 'dark' ? 'sun.png' : 'moon.png';
+        }
+
+        // Load the theme from localStorage
+        const savedTheme = localStorage.getItem('theme') || 'dark'; // Default to dark mode
+        setTheme(savedTheme);
+
+        // Toggle theme on button click
         themeToggle.addEventListener('click', () => {
-            document.body.classList.toggle('dark-mode');
+            const newTheme = document.body.classList.contains('dark-mode') ? 'light' : 'dark';
+            setTheme(newTheme);
+            localStorage.setItem('theme', newTheme); // Save the new theme to localStorage
         });
     </script>
 </body>
