@@ -12,7 +12,6 @@
         <div class="container">
             <h1>Flixxy</h1>
             <p>Discord Bot Developer & Python Scripter</p>
-            <button id="theme-toggle" aria-label="Toggle dark mode">🌙</button>
             <nav>
                 <ul>
                     <li><a href="#about">About</a></li>
@@ -21,13 +20,16 @@
                     <li><a href="#contact">Contact</a></li>
                 </ul>
             </nav>
+            <button id="theme-toggle">
+                🌙 Dark Mode
+            </button>
         </div>
     </header>
 
     <section id="about" class="about">
         <div class="container">
             <h2>About Me</h2>
-            <p>Hello! My name is Flixxy, a self-thaught coder, and I've been developing Discord bots for over a year now. I started my coding journey in 2022 with Python. I've also been doing a little web design, but it isn't my main focus point.</p>
+            <p>Hello! My name is Flixxy, a self-taught coder, and I've been developing Discord bots for over a year now. I started my coding journey in 2022 with Python. I've also been doing a little web design, but it isn't my main focus.</p>
         </div>
     </section>
 
@@ -41,7 +43,7 @@
                 </a>
                 <a href="https://github.com/w-Flixxy/Andrei-s-Helper" class="project-card" target="_blank">
                     <img src="project2.png" alt="Andrei's Helper">
-                    <p>Andrei's Helper is a Discord bot, a client requested a lightweight moderation bot.</p>
+                    <p>Andrei's Helper is a Discord bot; a client requested a lightweight moderation bot.</p>
                 </a>
                 <a href="https://github.com/w-Flixxy/IP-Lookup" class="project-card" target="_blank">
                     <img src="project3.png" alt="IP-Lookup">
@@ -80,7 +82,7 @@
             <p>Feel free to reach out to me through any of the platforms below:</p>
             <ul class="contact-list">
                 <li>Discord: flxxy.</li>
-                <li>GitHub: <a href="https://github.com/W-Flixxy" target="_blank">github.com/W-Flixxy</a></li>
+                <li>GitHub: github.com/W-Flixxy</li>
             </ul>
         </div>
     </section>
@@ -91,6 +93,11 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script>
+        const themeToggle = document.getElementById('theme-toggle');
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+        });
+    </script>
 </body>
 </html>
