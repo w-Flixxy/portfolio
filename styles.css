@@ -181,4 +181,16 @@ body.dark-mode .skill-card {
 }
 
 .contact-list li {
-    margin-bottom: 10
+    margin-bottom: 10px;
+}
+
+footer {
+    text-align: center;
+    padding: 20px 0;
+    background-color: #841dce;
+    color: #fff;
+}
+
+body.dark-mode footer {
+    background-color: #5c004d;
+}
