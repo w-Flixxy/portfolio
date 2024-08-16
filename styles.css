@@ -15,7 +15,7 @@ body {
 
 body.dark-mode {
     background-color: #121212;
-    color: #e0e0e0;
+    color: #9931C3; /* Updated dark mode text color */
 }
 
 .container {
@@ -81,7 +81,7 @@ header nav ul li a:hover {
 }
 
 body.dark-mode #theme-toggle {
-    color: #e0e0e0;
+    color: #9931C3; /* Updated toggle color for dark mode */
 }
 
 section {
@@ -96,7 +96,7 @@ section h2 {
 }
 
 body.dark-mode section h2 {
-    color: #d5a6e0;
+    color: #9931C3; /* Updated heading color for dark mode */
 }
 
 .about p {
@@ -144,7 +144,7 @@ body.dark-mode .project-card {
 }
 
 body.dark-mode .project-card h3 {
-    color: #e0e0e0;
+    color: #9931C3; /* Updated project card title color for dark mode */
 }
 
 .project-card:hover {
@@ -171,7 +171,7 @@ body.dark-mode .project-card h3 {
 
 body.dark-mode .skill-card {
     background-color: #1e1e1e;
-    color: #d5a6e0;
+    color: #9931C3; /* Updated skill card color for dark mode */
 }
 
 .skill-card:hover {
