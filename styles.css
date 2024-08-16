@@ -81,12 +81,17 @@ header nav ul li a:hover {
 }
 
 /* Dark mode styles */
+body.dark-mode {
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
 body.dark-mode header {
     background: linear-gradient(to right, #841dce, #4900a86b);
 }
 
-body.dark-mode section h2 {
-    color: #dbdbdb;
+body.dark-mode section h2{
+    color: #dbdbdb
 }
 
 body.dark-mode .project-card {
@@ -132,7 +137,7 @@ section h2 {
 }
 
 /* Projects */
-.project-grid, .services-grid {
+.project-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 20px;
@@ -215,11 +220,11 @@ body.dark-mode .skill-card {
     margin-bottom: 30px;
 }
 
-.services {
+.services{
     text-align: center;
 }
 
-.services p {
+.services p{
     font-size: 1.2em; /* Adjust size as needed */
     margin-bottom: 30px;   
 }
@@ -237,9 +242,11 @@ body.dark-mode .skill-card {
     white-space: nowrap; /* Prevent breaking in the middle of words */
 }
 
+
 .contact-list li a {
     color: #6a0dad;
     text-decoration: none;
+    ;
 }
 
 .contact-list li a:hover {
@@ -262,6 +269,7 @@ footer p {
 body.dark-mode footer {
     background-color: #3c3c3c; /* Adjusted the footer color for dark mode */
 }
+
 
 /* Services Section */
 .services-grid {
@@ -301,24 +309,9 @@ body.dark-mode .services .project-card {
 body.dark-mode .services .project-card h3 {
     color: #e0e0e0;
 }
-
 /* Remove bullets from lists */
 .services .project-card ul {
     list-style-type: none; /* Removes bullets */
     padding: 0; /* Removes default padding */
     margin: 0; /* Removes default margin */
-}
-
-/* Ensure centering on small screens */
-@media (max-width: 768px) {
-    .project-grid, .services-grid {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .project-card, .services .project-card {
-        width: 90%; /* Adjust width as needed */
-        max-width: 400px; /* Set a maximum width to prevent overly wide cards */
-    }
 }
