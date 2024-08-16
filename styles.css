@@ -15,7 +15,7 @@ body {
 
 body.dark-mode {
     background-color: #121212;
-    color: #9931C3; /* Updated dark mode text color */
+    color: #e0e0e0;
 }
 
 .container {
@@ -24,17 +24,13 @@ body.dark-mode {
     padding: 20px;
 }
 
+/* Header */
 header {
-    background: linear-gradient(to right, #841dce, #D169F5); /* Default light mode gradient */
+    background: linear-gradient(to right, #841dce, #4900a86b); /* Adjusted the dark purple color */
     color: #fff;
     padding: 20px 0;
     text-align: center;
     position: relative;
-    transition: background 0.3s ease; /* Smooth transition when toggling */
-}
-
-body.dark-mode header {
-    background: linear-gradient(to right, #841dce, #44005C); /* Dark mode gradient */
 }
 
 header h1 {
@@ -47,12 +43,13 @@ header p {
 }
 
 header nav ul {
+    padding-top: 40px;
     list-style: none;
 }
 
 header nav ul li {
     display: inline;
-    margin: 0 15px;
+    margin: 0 10px;
 }
 
 header nav ul li a {
@@ -81,9 +78,10 @@ header nav ul li a:hover {
 }
 
 body.dark-mode #theme-toggle {
-    color: #9931C3; /* Updated toggle color for dark mode */
+    color: #e0e0e0;
 }
 
+/* Sections */
 section {
     padding: 60px 0;
 }
@@ -92,11 +90,7 @@ section h2 {
     text-align: center;
     margin-bottom: 40px;
     font-size: 2.5em;
-    color: #6a0dad;
-}
-
-body.dark-mode section h2 {
-    color: #9931C3; /* Updated heading color for dark mode */
+    color: #6a0dad; /* Adjusted the purple color */
 }
 
 .about p {
@@ -106,11 +100,11 @@ body.dark-mode section h2 {
     font-size: 1.2em;
 }
 
+/* Projects */
 .project-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Adjusted for better responsiveness */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 20px;
-    justify-content: center; /* Center grid content */
 }
 
 .project-card {
@@ -144,7 +138,7 @@ body.dark-mode .project-card {
 }
 
 body.dark-mode .project-card h3 {
-    color: #9931C3; /* Updated project card title color for dark mode */
+    color: #e0e0e0;
 }
 
 .project-card:hover {
@@ -152,6 +146,7 @@ body.dark-mode .project-card h3 {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
+/* Skills */
 .skills-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -171,7 +166,7 @@ body.dark-mode .project-card h3 {
 
 body.dark-mode .skill-card {
     background-color: #1e1e1e;
-    color: #9931C3; /* Updated skill card color for dark mode */
+    color: #6a0dad;
 }
 
 .skill-card:hover {
@@ -179,39 +174,51 @@ body.dark-mode .skill-card {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
-/* Centering the Contact Section */
+/* Contact */
 .contact {
-    text-align: center; /* Center the entire section */
+    text-align: center;
 }
 
 .contact p {
-    text-align: center;
-    font-size: 1.2em;
+    font-size: 1.5em; /* Adjust size as needed */
     margin-bottom: 20px;
 }
 
 .contact-list {
     list-style: none;
     padding: 0;
-    text-align: center;
-    font-size: 1.2em;
-    display: inline-block; /* Make the list behave like inline content */
+    font-size: 1em; /* Make the contact info smaller */
+    margin: 0 auto; /* Center the list */
+    display: inline-block; /* Center the list items */
 }
 
 .contact-list li {
-    text-align: center;
     margin-bottom: 10px;
     white-space: nowrap; /* Prevent breaking in the middle of words */
 }
 
+.contact-list li a {
+    color: #6a0dad;
+    text-decoration: none;
+}
+
+.contact-list li a:hover {
+    text-decoration: underline;
+}
+
+/* Footer */
 footer {
-    text-align: center;
-    padding: 20px 0;
-    background-color: #841dce;
+    background-color: #4b0082;
     color: #fff;
-    margin-top: 40px;
+    text-align: center;
+    padding: 0px 0; /* Fixed padding */
+    margin-top: 4px;
+}
+
+footer p {
+    font-size: 1em;
 }
 
 body.dark-mode footer {
-    background-color: #5c004d;
+    background-color: #3c3c3c; /* Adjusted the footer color for dark mode */
 }
