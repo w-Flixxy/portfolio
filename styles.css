@@ -25,7 +25,7 @@ body.dark-mode {
 }
 
 header {
-    background: linear-gradient(to right, #841dce, #5c004d); /* Default light mode gradient */
+    background: linear-gradient(to right, #841dce, #D169F5); /* Default light mode gradient */
     color: #fff;
     padding: 20px 0;
     text-align: center;
@@ -34,7 +34,7 @@ header {
 }
 
 body.dark-mode header {
-    background: linear-gradient(to right, #5c004d, #2e0032); /* Dark mode gradient */
+    background: linear-gradient(to right, #841dce, #44005C); /* Dark mode gradient */
 }
 
 header h1 {
