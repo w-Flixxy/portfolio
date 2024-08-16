@@ -24,9 +24,8 @@ body.dark-mode {
     padding: 20px;
 }
 
-/* Header */
 header {
-    background: linear-gradient(to right, #841dce, #4900a86b); /* Adjusted the dark purple color */
+    background: linear-gradient(to right, #841dce, #5c004d);
     color: #fff;
     padding: 20px 0;
     text-align: center;
@@ -80,7 +79,6 @@ body.dark-mode #theme-toggle {
     color: #e0e0e0;
 }
 
-/* Sections */
 section {
     padding: 60px 0;
 }
@@ -89,7 +87,11 @@ section h2 {
     text-align: center;
     margin-bottom: 40px;
     font-size: 2.5em;
-    color: #6a0dad; /* Adjusted the purple color */
+    color: #6a0dad;
+}
+
+body.dark-mode section h2 {
+    color: #d5a6e0;
 }
 
 .about p {
@@ -99,11 +101,11 @@ section h2 {
     font-size: 1.2em;
 }
 
-/* Projects */
 .project-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Adjusted for better responsiveness */
     gap: 20px;
+    justify-content: center; /* Center grid content */
 }
 
 .project-card {
@@ -145,7 +147,6 @@ body.dark-mode .project-card h3 {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
-/* Skills */
 .skills-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -165,7 +166,7 @@ body.dark-mode .project-card h3 {
 
 body.dark-mode .skill-card {
     background-color: #1e1e1e;
-    color: #6a0dad;
+    color: #d5a6e0;
 }
 
 .skill-card:hover {
@@ -173,7 +174,6 @@ body.dark-mode .skill-card {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
-/* Contact */
 .contact-list {
     list-style: none;
     text-align: center;
@@ -181,31 +181,4 @@ body.dark-mode .skill-card {
 }
 
 .contact-list li {
-    margin-bottom: 10px;
-}
-
-.contact-list li a {
-    color: #6a0dad;
-    text-decoration: none;
-}
-
-.contact-list li a:hover {
-    text-decoration: underline;
-}
-
-/* Footer */
-footer {
-    background-color: #4b0082;
-    color: #fff;
-    text-align: center;
-    padding: 15px 0;
-    margin-top: 40px;
-}
-
-footer p {
-    font-size: 1em;
-}
-
-body.dark-mode footer {
-    background-color: #3c3c3c; /* Adjusted the footer color for dark mode */
-}
+    margin-bottom: 10
