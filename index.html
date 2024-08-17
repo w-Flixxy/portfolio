@@ -116,34 +116,63 @@
         const toggleButton = document.getElementById('theme-toggle');
         const body = document.body;
         const themeIcon = document.getElementById('theme-icon');
-
-        toggleButton.addEventListener('click', () => {
-            body.classList.toggle('dark-mode');
-            themeIcon.src = body.classList.contains('dark-mode') ? 'sun.png' : 'moon.png';
-        });
-        document.addEventListener("DOMContentLoaded", function() {
-    const hiddenElements = document.querySelectorAll(".hidden");
-
-    // Create an IntersectionObserver with rootMargin to trigger at the correct time
-    const observer = new IntersectionObserver((entries, observer) => {
-        entries.forEach((entry, index) => {
-            if (entry.isIntersecting) {
-                // Add a delay based on the index of the element
-                setTimeout(() => {
-                    entry.target.classList.add('show');
-                }, index * 150); // 150ms delay between each item
-                observer.unobserve(entry.target); // Stop observing once element is visible
+    
+        // Function to toggle the theme and save preference
+        function toggleTheme() {
+            if (body.classList.contains('dark-mode')) {
+                body.classList.remove('dark-mode');
+                themeIcon.src = 'moon.png';
+                localStorage.setItem('theme', 'light'); // Save preference
+            } else {
+                body.classList.add('dark-mode');
+                themeIcon.src = 'sun.png';
+                localStorage.setItem('theme', 'dark'); // Save preference
             }
+        }
+    
+        // Event listener for the theme toggle button
+        toggleButton.addEventListener('click', toggleTheme);
+    
+        // Function to apply the saved theme on page load
+        function loadTheme() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                body.classList.add('dark-mode');
+                themeIcon.src = 'sun.png';
+            } else {
+                body.classList.remove('dark-mode');
+                themeIcon.src = 'moon.png';
+            }
+        }
+    
+        // Apply the saved theme when the page loads
+        document.addEventListener("DOMContentLoaded", function() {
+            loadTheme();
+    
+            // Apply Intersection Observer
+            const hiddenElements = document.querySelectorAll(".hidden");
+    
+            // Create an IntersectionObserver with rootMargin to trigger at the correct time
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        // Add a delay based on the index of the element
+                        setTimeout(() => {
+                            entry.target.classList.add('show');
+                        }, index * 150); // 150ms delay between each item
+                        observer.unobserve(entry.target); // Stop observing once element is visible
+                    }
+                });
+            }, {
+                rootMargin: '0px 0px -50px 0px', // Adjust the margin as needed to delay trigger
+                threshold: 0.1 // Trigger when 10% of the element is visible
+            });
+    
+            hiddenElements.forEach(element => {
+                observer.observe(element);
+            });
         });
-    }, {
-        rootMargin: '0px 0px -50px 0px', // Adjust the margin as needed to delay trigger
-        threshold: 0.1 // Trigger when 10% of the element is visible
-    });
-
-    hiddenElements.forEach(element => {
-        observer.observe(element);
-    });
-});
     </script>
+    
 </body>
 </html>
