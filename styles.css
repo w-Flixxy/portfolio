@@ -21,7 +21,7 @@ body.dark-mode {
 }
 
 body.dark-mode header {
-    background: linear-gradient(to right, #841dce, #4900a86b);
+    background: linear-gradient(to right, #841dce, #4e02b16b);
 }
 
 body.dark-mode section h2 {
@@ -57,7 +57,7 @@ body:not(.dark-mode) #theme-icon {
 
 /* Header */
 header {
-    background: linear-gradient(to right, #841dce, #4900a86b);
+    background: linear-gradient(to right, #c38af1, #926ecc);
     color: #fff;
     padding: 20px 0;
     text-align: center;
