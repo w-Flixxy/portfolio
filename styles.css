@@ -5,6 +5,7 @@
     box-sizing: border-box;
 }
 
+/* Body Styles */
 body {
     font-family: 'Poppins', sans-serif;
     line-height: 1.6;
@@ -13,11 +14,41 @@ body {
     transition: background-color 0.3s, color 0.3s;
 }
 
+/* Dark Mode Styles */
 body.dark-mode {
     background-color: #121212;
     color: #e0e0e0;
 }
 
+body.dark-mode header {
+    background: linear-gradient(to right, #841dce, #4900a86b);
+}
+
+body.dark-mode section h2 {
+    color: #dbdbdb;
+}
+
+body.dark-mode .project-card,
+body.dark-mode .skill-card,
+body.dark-mode .contact-card,
+body.dark-mode .price-card {
+    background-color: #1e1e1e;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+body.dark-mode .contact-list li a {
+    color: #e0e0e0; /* Light color for dark mode */
+}
+
+body.dark-mode #theme-icon {
+    content: url('sun.png');
+}
+
+body:not(.dark-mode) #theme-icon {
+    content: url('moon.png');
+}
+
+/* Container */
 .container {
     width: 80%;
     margin: 0 auto; /* Center the container */
@@ -80,37 +111,6 @@ header nav ul li a:hover {
     transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Dark mode styles */
-body.dark-mode {
-    background-color: #121212;
-    color: #e0e0e0;
-}
-
-body.dark-mode header {
-    background: linear-gradient(to right, #841dce, #4900a86b);
-}
-
-body.dark-mode section h2 {
-    color: #dbdbdb;
-}
-
-body.dark-mode .project-card,
-body.dark-mode .skill-card,
-body.dark-mode .contact-card,
-body.dark-mode .price-card {
-    background-color: #1e1e1e;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-/* Theme icon transitions */
-body.dark-mode #theme-icon {
-    content: url('sun.png');
-}
-
-body:not(.dark-mode) #theme-icon {
-    content: url('moon.png');
-}
-
 /* Sections */
 section {
     padding: 30px 0;
@@ -140,10 +140,6 @@ section h2 {
     padding: 0; /* Remove any extra padding */
     max-width: 100%; /* Ensure container does not exceed viewport width */
     box-sizing: border-box; /* Include padding and border in total width */
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center; /* Center items horizontally */
-    gap: 20px;
 }
 
 .project-card {
@@ -159,8 +155,6 @@ section h2 {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     margin: 0; /* Remove margin to avoid shifting */
 }
-
-
 
 .project-card img {
     width: 50%;
@@ -180,6 +174,7 @@ section h2 {
     margin: 0; /* Remove default margins for better control */
     flex: 1; /* Allow paragraph to grow or shrink */
 }
+
 @media (max-width: 600px) {
     .project-card h3 {
         font-size: 1.4em; /* Smaller font size on small screens */
@@ -281,16 +276,23 @@ body.dark-mode .services .price-card h3 {
 }
 
 .contact-list li a {
-    color: #e0e0e0;
+    color: #333; /* Dark color for light mode */
     text-decoration: none;
+    transition: color 0.3s;
+}
+
+body.dark-mode .contact-list li a {
+    color: #e0e0e0; /* Light color for dark mode */
 }
 
 .contact-list li a:hover {
     text-decoration: underline;
 }
+
+/* Services */
 .services .negotiable {
     text-align: center;
-    padding-top:20px;
+    padding-top: 20px;
 }
 
 /* General styles for hidden state */
