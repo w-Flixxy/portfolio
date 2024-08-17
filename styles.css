@@ -189,7 +189,7 @@ body.dark-mode .project-card h3 {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     font-size: 1.2em;
-    color: #6a0dad;
+    color: #e0e0e0;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
