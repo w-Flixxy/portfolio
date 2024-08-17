@@ -140,6 +140,10 @@ section h2 {
     padding: 0; /* Remove any extra padding */
     max-width: 100%; /* Ensure container does not exceed viewport width */
     box-sizing: border-box; /* Include padding and border in total width */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Center items horizontally */
+    gap: 20px;
 }
 
 .project-card {
@@ -156,13 +160,6 @@ section h2 {
     margin: 0; /* Remove margin to avoid shifting */
 }
 
-/* Optional Flexbox alternative for centering */
-.project-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center; /* Center items horizontally */
-    gap: 20px;
-}
 
 
 .project-card img {
@@ -230,12 +227,12 @@ body.dark-mode .project-card h3 {
 
 /* Services */
 .services-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Center items horizontally within the container */
+    gap: 20px; /* Space between items */
 }
 
-.services .project-card,
 .services .price-card {
     background-color: #fff;
     padding: 20px;
@@ -243,6 +240,7 @@ body.dark-mode .project-card h3 {
     border-radius: 8px;
     text-align: center;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: 100%; /* Ensure it uses full width of the container */
 }
 
 .services .price-card:hover {
