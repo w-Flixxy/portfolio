@@ -102,10 +102,6 @@ body.dark-mode .price-card {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-body.dark-mode footer {
-    background-color: #3c3c3c;
-}
-
 /* Theme icon transitions */
 body.dark-mode #theme-icon {
     content: url('sun.png');
@@ -253,32 +249,27 @@ body.dark-mode .services .price-card h3 {
 }
 
 .contact-list li a {
-    color: #6a0dad;
+    color: #e0e0e0;
     text-decoration: none;
 }
 
 .contact-list li a:hover {
     text-decoration: underline;
 }
-
-/* Footer */
-footer {
-    background-color: #4b0082;
-    color: #fff;
-    text-align: center;
-    padding: 10px 0;
-    margin-top: 4px;
-}
-
-footer p {
-    font-size: 1em;
-}
-
-body.dark-mode footer {
-    background-color: #3c3c3c;
-}
-
 .services .negotiable {
     text-align: center;
     padding-top:20px;
+}
+
+/* General styles for hidden state */
+.hidden {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+/* When elements are in view, they'll have this class */
+.show {
+    opacity: 1;
+    transform: translateY(0);
 }
