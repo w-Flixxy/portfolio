@@ -26,7 +26,7 @@ body.dark-mode {
 
 /* Header */
 header {
-    background: linear-gradient(to right, #841dce, #4900a86b); /* Adjusted the dark purple color */
+    background: linear-gradient(to right, #841dce, #4900a86b);
     color: #fff;
     padding: 20px 0;
     text-align: center;
@@ -76,7 +76,7 @@ header nav ul li a:hover {
 }
 
 /* Transition for the project cards */
-.project-card, .skill-card {
+.project-card, .skill-card, .contact-card, .price-card {
     transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease;
 }
 
@@ -90,20 +90,18 @@ body.dark-mode header {
     background: linear-gradient(to right, #841dce, #4900a86b);
 }
 
-body.dark-mode section h2{
-    color: #dbdbdb
+body.dark-mode section h2 {
+    color: #dbdbdb;
 }
 
-body.dark-mode .project-card {
+body.dark-mode .project-card,
+body.dark-mode .skill-card,
+body.dark-mode .contact-card,
+body.dark-mode .price-card {
     background-color: #1e1e1e;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-body.dark-mode .skill-card {
-    background-color: #1e1e1e;
-}
-
-/* Footer dark mode */
 body.dark-mode footer {
     background-color: #3c3c3c;
 }
@@ -126,7 +124,7 @@ section h2 {
     text-align: center;
     margin-bottom: 30px;
     font-size: 2.5em;
-    color: #6a0dad; /* Adjusted the purple color */
+    color: #6a0dad;
 }
 
 .about p {
@@ -153,11 +151,6 @@ section h2 {
     text-decoration: none;
     color: inherit;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-body.dark-mode .project-card {
-    background-color: #1e1e1e;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .project-card img {
@@ -200,53 +193,68 @@ body.dark-mode .project-card h3 {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-body.dark-mode .skill-card {
-    background-color: #1e1e1e;
-    color: #ffffff;
-}
-
 .skill-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
+/* Services */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.services .project-card,
+.services .price-card {
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.services .price-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+body.dark-mode .services .price-card h3 {
+    color: #e0e0e0;
+}
+
 /* Contact */
-.contact {
+.contact-card {
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
     text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.contact p {
-    font-size: 1.2em; /* Adjust size as needed */
-    margin-bottom: 30px;
+.contact-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
-.services{
-    text-align: center;
-}
-
-.services p{
-    font-size: 1.2em; /* Adjust size as needed */
-    margin-bottom: 30px;   
-}
-
+/* Remove bullets from contact list */
 .contact-list {
-    list-style: none;
+    list-style-type: none;
     padding: 0;
-    font-size: 1em; /* Make the contact info smaller */
-    margin: 0 auto; /* Center the list */
-    display: inline-block; /* Center the list items */
+    margin: 0;
+    font-size: 1em;
 }
 
 .contact-list li {
     margin-bottom: 10px;
-    white-space: nowrap; /* Prevent breaking in the middle of words */
+    white-space: nowrap;
 }
-
 
 .contact-list li a {
     color: #6a0dad;
     text-decoration: none;
-    ;
 }
 
 .contact-list li a:hover {
@@ -258,7 +266,7 @@ footer {
     background-color: #4b0082;
     color: #fff;
     text-align: center;
-    padding: 0px 0; /* Fixed padding */
+    padding: 10px 0;
     margin-top: 4px;
 }
 
@@ -267,51 +275,10 @@ footer p {
 }
 
 body.dark-mode footer {
-    background-color: #3c3c3c; /* Adjusted the footer color for dark mode */
+    background-color: #3c3c3c;
 }
 
-
-/* Services Section */
-.services-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
-}
-
-.services .project-card {
-    background-color: #fff;
-    padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
+.services .negotiable {
     text-align: center;
-    text-decoration: none;
-    color: inherit;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    display: block; /* Ensure it behaves like a block-level element */
-}
-
-.services .project-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-}
-
-.services .project-card h3 {
-    font-size: 1.6em;
-    color: #333;
-    margin-bottom: 10px;
-}
-
-body.dark-mode .services .project-card {
-    background-color: #1e1e1e;
-    color: #e0e0e0;
-}
-
-body.dark-mode .services .project-card h3 {
-    color: #e0e0e0;
-}
-/* Remove bullets from lists */
-.services .project-card ul {
-    list-style-type: none; /* Removes bullets */
-    padding: 0; /* Removes default padding */
-    margin: 0; /* Removes default margin */
+    padding-top:20px;
 }
