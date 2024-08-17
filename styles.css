@@ -135,6 +135,7 @@ section h2 {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 20px;
+    justify-items: center;
 }
 
 .project-card {
@@ -146,6 +147,8 @@ section h2 {
     text-align: center;
     text-decoration: none;
     color: inherit;
+    max-width: 300px; /* Optional: Limit the width of the cards */
+    width: 100%; /* Ensure it uses the full available width within its grid cell */
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
