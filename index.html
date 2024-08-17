@@ -27,14 +27,14 @@
         </div>
     </header>
 
-    <section id="about" class="about">
+    <section id="about" class="about hidden">
         <div class="container">
             <h2>About Me</h2>
             <p>Hello! My name is Flixxy, a self-taught coder, and I've been developing Discord bots for over a year now. I started my coding journey in 2022 with Python. I've also been doing a little web design, but it isn't my main focus.</p>
         </div>
     </section>
 
-    <section id="projects" class="projects">
+    <section id="projects" class="projects hidden">
         <div class="container">
             <h2>Projects</h2>
             <div class="project-grid">
@@ -54,7 +54,7 @@
         </div>
     </section>
 
-    <section id="skills" class="skills">
+    <section id="skills" class="skills hidden">
         <div class="container">
             <h2>Skills</h2>
             <div class="skills-grid">
@@ -77,7 +77,7 @@
         </div>
     </section>
 
-    <section id="services" class="services">
+    <section id="services" class="services hidden">
         <div class="container">
             <h2>Services</h2>
             <div class="services-grid">
@@ -101,23 +101,17 @@
         </div>
     </section>
 
-    <section id="contact" class="contact">
+    <section id="contact" class="contact hidden">
         <div class="container">
             <h2>Contact Me</h2>
             <div class="contact-card">
                 <ul class="contact-list">
-                    <li>Email: <a href="mailto:flixxy@example.com">flixxy@example.com</a></li>
-                    <li>Discord: <a href="https://discordapp.com/users/783607307833212928" target="_blank">@Flixxy</a></li>
+                    <li>Discord: <a href="https://discordapp.com/users/825368073388294145" target="_blank">@flixxy.</a></li>
                     <li>GitHub: <a href="https://github.com/w-Flixxy" target="_blank">github.com/w-Flixxy</a></li>
                 </ul>
             </div>
         </div>
     </section>
-
-    <footer>
-        <p>&copy; 2024 Flixxy. All Rights Reserved.</p>
-    </footer>
-
     <script>
         const toggleButton = document.getElementById('theme-toggle');
         const body = document.body;
@@ -127,6 +121,29 @@
             body.classList.toggle('dark-mode');
             themeIcon.src = body.classList.contains('dark-mode') ? 'sun.png' : 'moon.png';
         });
+        document.addEventListener("DOMContentLoaded", function() {
+    const hiddenElements = document.querySelectorAll(".hidden");
+
+    // Create an IntersectionObserver with rootMargin to trigger at the correct time
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+                // Add a delay based on the index of the element
+                setTimeout(() => {
+                    entry.target.classList.add('show');
+                }, index * 150); // 150ms delay between each item
+                observer.unobserve(entry.target); // Stop observing once element is visible
+            }
+        });
+    }, {
+        rootMargin: '0px 0px -50px 0px', // Adjust the margin as needed to delay trigger
+        threshold: 0.1 // Trigger when 10% of the element is visible
+    });
+
+    hiddenElements.forEach(element => {
+        observer.observe(element);
+    });
+});
     </script>
 </body>
 </html>
