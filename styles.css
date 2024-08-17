@@ -132,14 +132,10 @@ section h2 {
 
 /* Projects */
 .project-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
-    justify-items: center; /* Center items within grid cells */
-    margin: 0 auto; /* Center the grid container */
-    padding: 0; /* Remove any extra padding */
-    max-width: 100%; /* Ensure container does not exceed viewport width */
-    box-sizing: border-box; /* Include padding and border in total width */
+    display: flex; /* Use flexbox layout */
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Center items horizontally within the container */
+    gap: 20px; /* Space between items */
 }
 
 .project-card {
@@ -151,13 +147,13 @@ section h2 {
     text-decoration: none;
     color: inherit;
     width: 100%;
-    max-width: 100%;
+    max-width: 600px; /* Adjust max width to fit the design better */
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    margin: 0; /* Remove margin to avoid shifting */
 }
 
 .project-card img {
-    width: 50%;
+    width: 100%; /* Make sure images fill the card width */
+    max-width: 100%; /* Prevent images from exceeding the card width */
     object-fit: cover;
     border-radius: 8px;
     margin-bottom: 15px;
