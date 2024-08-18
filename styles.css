@@ -31,7 +31,8 @@ body.dark-mode section h2 {
 body.dark-mode .project-card,
 body.dark-mode .skill-card,
 body.dark-mode .contact-card,
-body.dark-mode .price-card {
+body.dark-mode .price-card,
+body.dark-mode .T-Security-card{
     background-color: #1e1e1e;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
@@ -41,11 +42,11 @@ body.dark-mode .contact-list li a {
 }
 
 body.dark-mode #theme-icon {
-    content: url('sun.png');
+    content: url('assets/sun.png');
 }
 
 body:not(.dark-mode) #theme-icon {
-    content: url('moon.png');
+    content: url('assets/moon.png');
 }
 
 /* Container */
@@ -54,6 +55,7 @@ body:not(.dark-mode) #theme-icon {
     margin: 0 auto; /* Center the container */
     padding: 20px;
 }
+
 
 /* Header */
 header {
@@ -107,7 +109,7 @@ header nav ul li a:hover {
 }
 
 /* Transition for the project cards */
-.project-card, .skill-card, .contact-card, .price-card {
+.project-card, .skill-card, .contact-card, .price-card{
     transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease;
 }
 
@@ -147,19 +149,10 @@ section h2 {
     text-decoration: none;
     color: inherit;
     width: 100%;
-    max-width: 600px; /* Adjust max width to fit the design better */
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.project-card img {
-    width: 100%; /* Make sure images fill the card width */
-    max-width: 100%; /* Prevent images from exceeding the card width */
-    object-fit: cover;
-    border-radius: 8px;
-    margin-bottom: 15px;
-}
-
-.project-card h3 {
+.project-card h3, .T-Security-card h3 {
     font-size: 1.6em;
     color: #333;
     margin: 10px 0; /* Margins around the heading */
@@ -171,17 +164,29 @@ section h2 {
     flex: 1; /* Allow paragraph to grow or shrink */
 }
 
-@media (max-width: 600px) {
-    .project-card h3 {
-        font-size: 1.4em; /* Smaller font size on small screens */
-    }
-
-    .project-card p {
-        font-size: 0.9em; /* Smaller font size on small screens */
-    }
+/* Remove underline and set color for the Projects link in light mode */
+.projects-link {
+    color: #6a0dad; /* Blue color for light mode */
+    text-decoration: none; /* Remove underline */
+    transition: color 0.3s; /* Smooth transition for hover effect */
 }
 
-body.dark-mode .project-card h3 {
+/* Hover effect for the Projects link */
+.projects-link:hover {
+    text-decoration: underline; /* Underline on hover */
+    color: #6a0dad; /* Darker blue on hover */
+}
+
+/* Dark mode styles for the Projects link */
+body.dark-mode .projects-link {
+    color: #e0e0e0; /* Bright blue for dark mode */
+}
+
+body.dark-mode .projects-link:hover {
+    color: #e0e0e0; /* Darker blue for dark mode hover */
+}
+
+body.dark-mode .project-card h3 , body.dark-mode .T-Security-card h3{
     color: #e0e0e0;
 }
 
@@ -224,6 +229,10 @@ body.dark-mode .project-card h3 {
     gap: 20px; /* Space between items */
 }
 
+.price-card p{
+    padding-top: 10px;
+}
+
 .services .price-card {
     background-color: #fff;
     padding: 20px;
@@ -239,7 +248,7 @@ body.dark-mode .project-card h3 {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
-body.dark-mode .services .price-card h3 {
+body.dark-mode h3 {
     color: #e0e0e0;
 }
 
@@ -289,6 +298,27 @@ body.dark-mode .contact-list li a {
 .services .negotiable {
     text-align: center;
     padding-top: 20px;
+}
+
+.image-wrapper {
+    padding-top: 20px;
+    border-radius: 8px; /* Ensures the wrapper also has rounded corners */
+    overflow: hidden; /* Ensures the image does not overflow the wrapper's rounded corners */
+    max-width:600px ;
+    margin: 0 auto;
+}
+
+.price-card img {
+    width: 100%; /* Make the image take up the full width of the wrapper */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 8px; /* Apply rounded corners to all sides */
+    object-fit: cover; /* Ensures the image covers the area without distortion */
+}
+
+
+/* Dark mode specific styles for the images */
+body.dark-mode .price-card img {
+    filter: brightness(0.9); /* Slightly darken images in dark mode for consistency */
 }
 
 /* General styles for hidden state */
