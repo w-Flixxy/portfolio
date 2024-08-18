@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <link rel="icon" href="assets/favicon.png" type="image/png">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body class="dark-mode"> <!-- Default to dark mode -->
+    <header>
+        <div class="container">
+            <h1>Projects</h1>
+            <p>More in depth description of my projects.</p>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                </ul>
+            </nav>
+            <button id="theme-toggle">
+                <img id="theme-icon" src="assets/sun.png" alt="Theme Toggle">
+            </button>
+        </div>
+    </header>
+    <section id="services" class="services hidden">
+        <div class="container">
+            <h2>T-Security</h2>
+            <div class="services-grid">
+                <div class="price-card">
+                    <h3>Lock-Unlock features</h3>
+                    <p>Prevents users/roles from sending messages in a channel.</p>
+                    <div class="image-wrapper">
+                        <img src="assets/lock-unlock.png" alt="Lock-Unlock Image">
+                    </div>
+                </div>
+                <div class="price-card">
+                    <h3>Anti-Raid features</h3>
+                    <p>Automatically detects raids and kicks the bot before any harm has been done.</p>
+                </div>
+                <div class="price-card">
+                    <h3>Notifications</h3>
+                    <p>Whenever T-Security makes an action, it notifies the owner of the Discord server.</p>
+                    <div class="image-wrapper">
+                        <img src="assets/notifications.png" alt="Notifications Image">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="services" class="services hidden">
+        <div class="container">
+            <h2>Other Features</h2>
+            <div class="services-grid">
+                <div class="price-card">
+                    <h3>Advanced Help Command</h3>
+                    <p>An interactive help menu.</p>
+                    <div class="image-wrapper">
+                        <img src="assets/help-menu.png" alt="Help Menu">
+                    </div>
+                    <div class="image-wrapper">
+                        <img src="assets/help-menu2.png" alt="Help Menu 2">
+                    </div>
+                </div>
+                <div class="price-card">
+                    <h3>Kick & Ban Commands</h3>
+                    <p>Commands that only work with certain permissions.</p>
+                    <div class="image-wrapper">
+                        <img src="assets/error-handling.png" alt="">
+                    </div>
+                </div>
+                <div class="price-card">
+                    <h3>Automatically Updating Verify Message</h3>
+                    <p>Whenever the bot restarts buttons don't work anymore. So when the bot is back online, it removes the old, not working, verify message and sends a new one.</p>
+                    <div class="image-wrapper">
+                        <img src="assets/updating-verify 1.png" alt="">
+                    </div>
+                    <div class="image-wrapper">
+                        <img src="assets/updating-verify 2.png" alt="">
+                    </div>
+                    <p>
+                        <i>(Notice the timestamps)</i>
+                    </p>
+                </div>
+                <div class="price-card">
+                    <h3>Bot Status</h3>
+                    <p>Making use of flask servers to check if the server that hosts the bot is online.</p>
+                    <div class="image-wrapper">
+                        <img src="assets/uptimerobot.png" alt="">
+                    </div>
+                    <p><i>(The uptimerobot site is not developed by me.)</i></p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script>
+        const toggleButton = document.getElementById('theme-toggle');
+        const body = document.body;
+        const themeIcon = document.getElementById('theme-icon');
+    
+        // Function to toggle the theme and save preference
+        function toggleTheme() {
+            if (body.classList.contains('dark-mode')) {
+                body.classList.remove('dark-mode');
+                themeIcon.src = 'assets/moon.png';
+                localStorage.setItem('theme', 'light'); // Save preference
+            } else {
+                body.classList.add('dark-mode');
+                themeIcon.src = 'assets/sun.png';
+                localStorage.setItem('theme', 'dark'); // Save preference
+            }
+        }
+    
+        // Event listener for the theme toggle button
+        toggleButton.addEventListener('click', toggleTheme);
+    
+        // Function to apply the saved theme on page load
+        function loadTheme() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                body.classList.add('dark-mode');
+                themeIcon.src = 'assets/sun.png';
+            } else {
+                body.classList.remove('dark-mode');
+                themeIcon.src = 'assets/moon.png';
+            }
+        }
+    
+        // Apply the saved theme when the page loads
+        document.addEventListener("DOMContentLoaded", function() {
+            loadTheme();
+    
+            // Apply Intersection Observer
+            const hiddenElements = document.querySelectorAll(".hidden");
+    
+            let delay = 0; // Initial delay
+    
+            // Create an IntersectionObserver with rootMargin to trigger at the correct time
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Add a delay for each element as it comes into view
+                        setTimeout(() => {
+                            entry.target.classList.add('show');
+                        }, delay);
+                        delay += 150; // Increase the delay for the next element
+                        observer.unobserve(entry.target); // Stop observing once element is visible
+                    }
+                });
+            }, {
+                rootMargin: '0px 0px -50px 0px', // Adjust the margin as needed to delay trigger
+                threshold: 0.1 // Trigger when 10% of the element is visible
+            });
+    
+            hiddenElements.forEach(element => {
+                observer.observe(element);
+            });
+        });
+    </script>
+    
+    
+    
+</body>
+</html>
