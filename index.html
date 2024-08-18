@@ -15,14 +15,11 @@
             <p>Discord Bot Developer & Python Scripter</p>
             <nav>
                 <ul>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#projects">Projects</a></li>
-                    <li><a href="#skills">Skills</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="projects.html">Projects</a></li>
                 </ul>
             </nav>
             <button id="theme-toggle">
-                <img id="theme-icon" src="sun.png" alt="Theme Toggle">
+                <img id="theme-icon" src="assets/sun.png" alt="Theme Toggle">
             </button>
         </div>
     </header>
@@ -36,7 +33,7 @@
 
     <section id="projects" class="projects hidden">
         <div class="container">
-            <h2><a href="projects.html" class="projects-link" target="_blank">Projects</a></h2>
+            <h2><a href="projects.html" class="projects-link">Projects</a></h2>
             <div class="project-grid">
                 <a href="https://github.com/w-Flixxy/T-Security" class="project-card" target="_blank">
                     <h3>T-Security</h3>
@@ -122,11 +119,11 @@
         function toggleTheme() {
             if (body.classList.contains('dark-mode')) {
                 body.classList.remove('dark-mode');
-                themeIcon.src = 'moon.png';
+                themeIcon.src = 'assets/moon.png';
                 localStorage.setItem('theme', 'light'); // Save preference
             } else {
                 body.classList.add('dark-mode');
-                themeIcon.src = 'sun.png';
+                themeIcon.src = 'assets/sun.png';
                 localStorage.setItem('theme', 'dark'); // Save preference
             }
         }
@@ -139,10 +136,10 @@
             const savedTheme = localStorage.getItem('theme');
             if (savedTheme === 'dark') {
                 body.classList.add('dark-mode');
-                themeIcon.src = 'sun.png';
+                themeIcon.src = 'assets/sun.png';
             } else {
                 body.classList.remove('dark-mode');
-                themeIcon.src = 'moon.png';
+                themeIcon.src = 'assets/moon.png';
             }
         }
     
