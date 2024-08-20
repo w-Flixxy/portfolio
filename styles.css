@@ -32,9 +32,10 @@ body.dark-mode .project-card,
 body.dark-mode .skill-card,
 body.dark-mode .contact-card,
 body.dark-mode .price-card,
-body.dark-mode .T-Security-card{
+body.dark-mode .T-Security-card {
     background-color: #1e1e1e;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    max-width: 800px;
 }
 
 body.dark-mode .contact-list li a {
@@ -55,7 +56,6 @@ body:not(.dark-mode) #theme-icon {
     margin: 0 auto; /* Center the container */
     padding: 20px;
 }
-
 
 /* Header */
 header {
@@ -109,7 +109,7 @@ header nav ul li a:hover {
 }
 
 /* Transition for the project cards */
-.project-card, .skill-card, .contact-card, .price-card{
+.project-card, .skill-card, .contact-card, .price-card {
     transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease;
 }
 
@@ -186,7 +186,7 @@ body.dark-mode .projects-link:hover {
     color: #e0e0e0; /* Darker blue for dark mode hover */
 }
 
-body.dark-mode .project-card h3 , body.dark-mode .T-Security-card h3{
+body.dark-mode .project-card h3, body.dark-mode .T-Security-card h3 {
     color: #e0e0e0;
 }
 
@@ -197,12 +197,17 @@ body.dark-mode .project-card h3 , body.dark-mode .T-Security-card h3{
 
 /* Skills */
 .skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 20px;
+    display: flex; /* Use flexbox layout */
+    flex-wrap: wrap; /* Allow items to wrap to the next line */
+    justify-content: center; /* Center items horizontally */
+    gap: 20px; /* Space between items */
     text-align: center;
+    max-width: 800px; /* Ensure a maximum width */
+    margin: 0 auto; /* Center the grid within its parent */
+    padding: 20px; /* Optional: Add padding for aesthetics */
 }
 
+/* Ensure skill cards are responsive */
 .skill-card {
     display: block;
     background-color: #fff;
@@ -212,13 +217,28 @@ body.dark-mode .project-card h3 , body.dark-mode .T-Security-card h3{
     text-align: center;
     text-decoration: none;
     color: inherit;
-    width: 100%; /* Ensure it uses the full available width within its grid cell */
+    width: calc(100% / 3 - 20px); /* Adjust width for 3 items in a row with gap */
+    max-width: 200px; /* Set a max-width for cards */
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.skill-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+.price-card img {
+    padding-top: 20px;
+    text-align: center;
+    margin: 0 auto;
+}
+
+/* For smaller screens, adjust the width */
+@media (max-width: 768px) {
+    .skill-card {
+        width: calc(100% / 2 - 20px); /* Adjust for 2 items in a row */
+    }
+}
+
+@media (max-width: 480px) {
+    .skill-card {
+        width: 100%; /* Full width on very small screens */
+    }
 }
 
 /* Services */
@@ -229,7 +249,7 @@ body.dark-mode .project-card h3 , body.dark-mode .T-Security-card h3{
     gap: 20px; /* Space between items */
 }
 
-.price-card p{
+.price-card p {
     padding-top: 10px;
 }
 
@@ -241,6 +261,7 @@ body.dark-mode .project-card h3 , body.dark-mode .T-Security-card h3{
     text-align: center;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     width: 100%; /* Ensure it uses full width of the container */
+    max-width: 800px;
 }
 
 .services .price-card:hover {
@@ -260,11 +281,9 @@ body.dark-mode h3 {
     border-radius: 8px;
     text-align: center;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.contact-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    width: 100%; /* Full width */
+    max-width: 400px; /* Set a max-width for the contact card */
+    margin: 20px auto; /* Center it with margin auto */
 }
 
 /* Remove bullets from contact list */
@@ -301,35 +320,15 @@ body.dark-mode .contact-list li a {
 }
 
 .image-wrapper {
+    display: flex; /* Use flexbox to center the image */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
     padding-top: 20px;
-    border-radius: 8px; /* Ensures the wrapper also has rounded corners */
-    overflow: hidden; /* Ensures the image does not overflow the wrapper's rounded corners */
-    max-width:600px ;
-    margin: 0 auto;
+    text-align: center;
 }
 
-.price-card img {
-    width: 100%; /* Make the image take up the full width of the wrapper */
-    height: auto; /* Maintain aspect ratio */
-    border-radius: 8px; /* Apply rounded corners to all sides */
-    object-fit: cover; /* Ensures the image covers the area without distortion */
-}
-
-
-/* Dark mode specific styles for the images */
-body.dark-mode .price-card img {
-    filter: brightness(0.9); /* Slightly darken images in dark mode for consistency */
-}
-
-/* General styles for hidden state */
-.hidden {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-}
-
-/* When elements are in view, they'll have this class */
-.show {
-    opacity: 1;
-    transform: translateY(0);
+.image-wrapper img {
+    max-width: 100%; /* Ensure the image scales within the container */
+    height: auto; /* Maintain the aspect ratio */
+    display: block; /* Remove any extra spacing below the image */
 }
