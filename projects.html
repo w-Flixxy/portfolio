@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects — Flixxy</title>
+    <link rel="icon" href="assets/favicon.png" type="image/png">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body class="dark-mode"> <!-- Default to dark mode -->
+    <header>
+        <div class="container">
+            <h1>Projects</h1>
+            <p>A closer look at the projects and the features behind them.</p>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                </ul>
+            </nav>
+            <button id="theme-toggle">
+                <img id="theme-icon" src="assets/sun.png" alt="Toggle light and dark theme">
+            </button>
+        </div>
+    </header>
+    <section id="services" class="services hidden">
+        <div class="container">
+            <h2>T-Security</h2>
+            <div class="services-grid">
+                    <div class="price-card">
+                    <h3>Channel Lock &amp; Unlock</h3>
+                    <p>Restricts message permissions for selected users or roles in a channel, and restores them on demand.</p>
+                    <div class="image-wrapper">
+                        <img src="assets/lock-unlock.png" alt="Lock and unlock command output in Discord">
+                    </div>
+                </div>
+                <div class="price-card">
+                    <h3>Raid Protection</h3>
+                    <p>Detects coordinated raids automatically and removes the offending bot before any damage is done.</p>
+                </div>
+                <div class="price-card">
+                    <h3>Owner Notifications</h3>
+                    <p>Every action the bot takes is reported directly to the server owner.</p>
+                    <div class="image-wrapper">
+                        <img src="assets/notifications.png" alt="Notification message sent to the server owner">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="services" class="services hidden">
+        <div class="container">
+            <h2>Additional Features</h2>
+            <div class="services-grid">
+                <div class="price-card">
+                    <h3>Interactive Help Menu</h3>
+                    <p>A navigable help command that groups commands by category rather than listing them in a single block.</p>
+                    <div class="image-wrapper">
+                        <img src="assets/help-menu.png" alt="Help menu overview">
+                    </div>
+                    <div class="image-wrapper">
+                        <img src="assets/help-menu2.png" alt="Help menu category view">
+                    </div>
+                </div>
+                <div class="price-card">
+                    <h3>Kick &amp; Ban Commands</h3>
+                    <p>Permission-gated moderation commands, with clear error handling when a user lacks the required role.</p>
+                    <div class="image-wrapper">
+                        <img src="assets/error-handling.png" alt="Permission error response in Discord">
+                    </div>
+                </div>
+                <div class="price-card">
+                    <h3>Self-Refreshing Verification Message</h3>
+                    <p>Button components stop responding once the bot restarts. On start-up it clears the stale verification message and posts a working replacement automatically.</p>
+                    <div class="image-wrapper">
+                        <img src="assets/updating-verify 1.png" alt="Verification message before the restart">
+                    </div>
+                    <div class="image-wrapper">
+                        <img src="assets/updating-verify 2.png" alt="Replacement verification message after the restart">
+                    </div>
+                    <p>
+                        <i>Note the timestamps.</i>
+                    </p>
+                </div>
+                <div class="price-card">
+                    <h3>Uptime Monitoring</h3>
+                    <p>A Flask endpoint exposes the bot's health so the host can be monitored and downtime flagged immediately.</p>
+                    <div class="image-wrapper">
+                        <img src="assets/uptimerobot.png" alt="Uptime monitoring dashboard showing the bot online">
+                    </div>
+                    <p><i>UptimeRobot is a third-party service, not my own work.</i></p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script>
+        const toggleButton = document.getElementById('theme-toggle');
+        const body = document.body;
+        const themeIcon = document.getElementById('theme-icon');
+    
+        // Function to toggle the theme and save preference
+        function toggleTheme() {
+            if (body.classList.contains('dark-mode')) {
+                body.classList.remove('dark-mode');
+                themeIcon.src = 'assets/moon.png';
+                localStorage.setItem('theme', 'light'); // Save preference
+            } else {
+                body.classList.add('dark-mode');
+                themeIcon.src = 'assets/sun.png';
+                localStorage.setItem('theme', 'dark'); // Save preference
+            }
+        }
+    
+        // Event listener for the theme toggle button
+        toggleButton.addEventListener('click', toggleTheme);
+    
+        // Function to apply the saved theme on page load
+        function loadTheme() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                body.classList.add('dark-mode');
+                themeIcon.src = 'assets/sun.png';
+            } else {
+                body.classList.remove('dark-mode');
+                themeIcon.src = 'assets/moon.png';
+            }
+        }
+    
+        // Apply the saved theme when the page loads
+        document.addEventListener("DOMContentLoaded", function() {
+            loadTheme();
+    
+            // Apply Intersection Observer
+            const hiddenElements = document.querySelectorAll(".hidden");
+    
+            // Create an IntersectionObserver with rootMargin to trigger at the correct time
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        // Add a delay based on the index of the element
+                        setTimeout(() => {
+                            entry.target.classList.add('show');
+                        }, index * 150); // 150ms delay between each item
+                        observer.unobserve(entry.target); // Stop observing once element is visible
+                    }
+                });
+            }, {
+                rootMargin: '0px 0px -50px 0px', // Adjust the margin as needed to delay trigger
+                threshold: 0.1 // Trigger when 10% of the element is visible
+            });
+    
+            hiddenElements.forEach(element => {
+                observer.observe(element);
+            });
+        });
+    </script>
+</body>
+</html>

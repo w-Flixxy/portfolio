@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flixxy — Discord Bot Developer</title>
+    <link rel="icon" href="assets/favicon.png" type="image/png">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body class="dark-mode"> <!-- Default to dark mode -->
+    <header>
+        <div class="container">
+            <h1>Flixxy</h1>
+            <p>Discord Bot Developer &amp; Python Engineer</p>
+            <nav>
+                <ul>
+                    <li><a href="projects.html">Projects</a></li>
+                </ul>
+            </nav>
+            <button id="theme-toggle">
+                <img id="theme-icon" src="assets/sun.png" alt="Toggle light and dark theme">
+            </button>
+        </div>
+    </header>
+
+    <section id="about" class="about hidden">
+        <div class="container">
+            <h2>About</h2>
+            <p>I'm a self-taught developer working primarily in Python. I started programming in 2022 and have specialised in Discord bots since, building moderation, anti-raid and automation systems for communities and individual clients. I also work with HTML and CSS, which lets me deliver the interfaces around that backend work.</p>
+        </div>
+    </section>
+
+    <section id="projects" class="projects hidden">
+        <div class="container">
+            <h2><a href="projects.html" class="projects-link">Projects</a></h2>
+            <div class="project-grid">
+                <a href="https://github.com/w-Flixxy/T-Security" class="project-card" target="_blank">
+                    <h3>T-Security</h3>
+                    <p>A Discord moderation bot with automated raid detection and a full set of moderation commands.</p>
+                </a>
+                <a href="https://github.com/w-Flixxy/Andrei-s-Helper" class="project-card" target="_blank">
+                    <h3>Andrei's Helper</h3>
+                    <p>A lightweight moderation bot built to a client's specification.</p>
+                </a>
+                <a href="https://github.com/w-Flixxy/IP-Lookup" class="project-card" target="_blank">
+                    <h3>IP-Lookup</h3>
+                    <p>A desktop tool that queries a public API and presents IP address details through a graphical interface.</p>
+                </a>
+            </div>
+        </div>
+    </section>
+    
+
+    <section id="skills" class="skills hidden">
+        <div class="container">
+            <h2>Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <h3>Python</h3>
+                </div>
+                <div class="skill-card">
+                    <h3>Discord.py</h3>
+                </div>
+                <div class="skill-card">
+                    <h3>Tkinter</h3>
+                </div>
+                <div class="skill-card">
+                    <h3>HTML <span class="skill-note">(working knowledge)</span></h3>
+                </div>
+                <div class="skill-card">
+                    <h3>CSS <span class="skill-note">(working knowledge)</span></h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="services hidden">
+        <div class="container">
+            <h2>Services</h2>
+            <div class="services-grid">
+                <div class="price-card">
+                    <h3>Starter Bot</h3>
+                    <p>On request</p>
+                    <p><i>1–5 features</i></p>
+                </div>
+                <div class="price-card">
+                    <h3>Standard Bot</h3>
+                    <p>On request</p>
+                    <p><i>5–15 features</i></p>
+                </div>
+                <div class="price-card">
+                    <h3>Advanced Bot</h3>
+                    <p>On request</p>
+                    <p><i>15+ features</i></p>
+                </div>
+                <p class="negotiable"><i>Pricing on request — quotes are agreed per project once the work is scoped.</i></p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact hidden">
+        <div class="container">
+            <h2>Contact</h2>
+            <div class="contact-card">
+                <ul class="contact-list">
+                    <li>Discord: <a href="https://discord.com/users/825368073388294145" target="_blank">@flixxy.</a></li>
+                    <li>GitHub: <a href="https://github.com/w-Flixxy" target="_blank">github.com/w-Flixxy</a></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <script>
+        const toggleButton = document.getElementById('theme-toggle');
+        const body = document.body;
+        const themeIcon = document.getElementById('theme-icon');
+    
+        // Function to toggle the theme and save preference
+        function toggleTheme() {
+            if (body.classList.contains('dark-mode')) {
+                body.classList.remove('dark-mode');
+                themeIcon.src = 'assets/moon.png';
+                localStorage.setItem('theme', 'light'); // Save preference
+            } else {
+                body.classList.add('dark-mode');
+                themeIcon.src = 'assets/sun.png';
+                localStorage.setItem('theme', 'dark'); // Save preference
+            }
+        }
+    
+        // Event listener for the theme toggle button
+        toggleButton.addEventListener('click', toggleTheme);
+    
+        // Function to apply the saved theme on page load
+        function loadTheme() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                body.classList.add('dark-mode');
+                themeIcon.src = 'assets/sun.png';
+            } else {
+                body.classList.remove('dark-mode');
+                themeIcon.src = 'assets/moon.png';
+            }
+        }
+    
+        // Apply the saved theme when the page loads
+        document.addEventListener("DOMContentLoaded", function() {
+            loadTheme();
+    
+            // Apply Intersection Observer
+            const hiddenElements = document.querySelectorAll(".hidden");
+    
+            // Create an IntersectionObserver with rootMargin to trigger at the correct time
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        // Add a delay based on the index of the element
+                        setTimeout(() => {
+                            entry.target.classList.add('show');
+                        }, index * 150); // 150ms delay between each item
+                        observer.unobserve(entry.target); // Stop observing once element is visible
+                    }
+                });
+            }, {
+                rootMargin: '0px 0px -50px 0px', // Adjust the margin as needed to delay trigger
+                threshold: 0.1 // Trigger when 10% of the element is visible
+            });
+    
+            hiddenElements.forEach(element => {
+                observer.observe(element);
+            });
+        });
+    </script>
+</body>
+</html>
