@@ -4,34 +4,57 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projects — Flixxy</title>
-    <link rel="icon" href="assets/favicon.png" type="image/png">
+    <link rel="icon" href="../assets/favicon.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<script>
+/* Pick the theme before first paint. Deferring this to script.js would
+   render the default first and then flip, which reads as a flash.
+   Nothing is stored, so every load rolls again — including a refresh and
+   each move between pages. */
+(function () {
+  var themes = ["cyanotype", "aurora", "ink"];
+  var pick = themes[Math.random() * themes.length | 0];
+  if (pick !== "cyanotype") document.documentElement.setAttribute("data-theme", pick);
+}());
+</script>
 </head>
-<body class="dark-mode"> <!-- Default to dark mode -->
+<body>
+<!--
+THESIS: The plate book itself. Each feature is a numbered figure and every screenshot is a specimen laid on the plate, framed and captioned rather than floated on the page.
+OWN-WORLD: Prussian blue exposure ground, luminous pale marks, one gold-toned accent for anything interactive. Hairline registration marks and leaders, Schibsted Grotesk at one clean weight scale, evidence framed as numbered figures.
+STORY: A visitor who wants proof reads one figure and sees the real interface doing what the caption says.
+FIRST VIEWPORT: Prussian ground, the page title set as a photogram, its line beneath, and the first figure already breaking the fold.
+FORM: Cyanotype Plates — the direction the roll originally assigned, built as a second site alongside the ASCII one at the user's request.
+FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance
+-->
+    <a class="skip" href="#services">Skip to content</a>
+
     <header>
         <div class="container">
-            <h1>Projects</h1>
-            <p>A closer look at the projects and the features behind them.</p>
-            <nav>
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                </ul>
-            </nav>
-            <button id="theme-toggle">
-                <img id="theme-icon" src="assets/sun.png" alt="Toggle light and dark theme">
-            </button>
+            <div class="plate plate--sub">
+                <h1 class="photogram">Projects</h1>
+                <p class="role">A closer look at the projects and the features behind them.</p>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                    </ul>
+                </nav>
+            </div>
         </div>
     </header>
+
     <section id="services" class="services hidden">
         <div class="container">
             <h2>T-Security</h2>
             <div class="services-grid">
-                    <div class="price-card">
+                <div class="price-card">
                     <h3>Channel Lock &amp; Unlock</h3>
                     <p>Restricts message permissions for selected users or roles in a channel, and restores them on demand.</p>
-                    <div class="image-wrapper">
-                        <img src="assets/lock-unlock.png" alt="Lock and unlock command output in Discord">
+                    <div class="image-wrapper" data-fig="i">
+                        <img src="../assets/lock-unlock.png" alt="Lock and unlock command output in Discord" loading="lazy" decoding="async" width="922" height="620">
                     </div>
                 </div>
                 <div class="price-card">
@@ -41,42 +64,43 @@
                 <div class="price-card">
                     <h3>Owner Notifications</h3>
                     <p>Every action the bot takes is reported directly to the server owner.</p>
-                    <div class="image-wrapper">
-                        <img src="assets/notifications.png" alt="Notification message sent to the server owner">
+                    <div class="image-wrapper" data-fig="ii">
+                        <img src="../assets/notifications.png" alt="Notification message sent to the server owner" loading="lazy" decoding="async" width="834" height="563">
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <section id="services" class="services hidden">
+
+    <section id="additional" class="services hidden">
         <div class="container">
             <h2>Additional Features</h2>
             <div class="services-grid">
                 <div class="price-card">
                     <h3>Interactive Help Menu</h3>
                     <p>A navigable help command that groups commands by category rather than listing them in a single block.</p>
-                    <div class="image-wrapper">
-                        <img src="assets/help-menu.png" alt="Help menu overview">
+                    <div class="image-wrapper" data-fig="iii">
+                        <img src="../assets/help-menu.png" alt="Help menu overview" loading="lazy" decoding="async" width="704" height="230">
                     </div>
-                    <div class="image-wrapper">
-                        <img src="assets/help-menu2.png" alt="Help menu category view">
+                    <div class="image-wrapper" data-fig="iv">
+                        <img src="../assets/help-menu2.png" alt="Help menu category view" loading="lazy" decoding="async" width="712" height="376">
                     </div>
                 </div>
                 <div class="price-card">
                     <h3>Kick &amp; Ban Commands</h3>
                     <p>Permission-gated moderation commands, with clear error handling when a user lacks the required role.</p>
-                    <div class="image-wrapper">
-                        <img src="assets/error-handling.png" alt="Permission error response in Discord">
+                    <div class="image-wrapper" data-fig="v">
+                        <img src="../assets/error-handling.png" alt="Permission error response in Discord" loading="lazy" decoding="async" width="1100" height="346">
                     </div>
                 </div>
                 <div class="price-card">
                     <h3>Self-Refreshing Verification Message</h3>
                     <p>Button components stop responding once the bot restarts. On start-up it clears the stale verification message and posts a working replacement automatically.</p>
-                    <div class="image-wrapper">
-                        <img src="assets/updating-verify 1.png" alt="Verification message before the restart">
+                    <div class="image-wrapper" data-fig="vi">
+                        <img src="../assets/updating-verify 1.png" alt="Verification message before the restart" loading="lazy" decoding="async" width="548" height="168">
                     </div>
-                    <div class="image-wrapper">
-                        <img src="assets/updating-verify 2.png" alt="Replacement verification message after the restart">
+                    <div class="image-wrapper" data-fig="vii">
+                        <img src="../assets/updating-verify 2.png" alt="Replacement verification message after the restart" loading="lazy" decoding="async" width="531" height="171">
                     </div>
                     <p>
                         <i>Note the timestamps.</i>
@@ -85,74 +109,15 @@
                 <div class="price-card">
                     <h3>Uptime Monitoring</h3>
                     <p>A Flask endpoint exposes the bot's health so the host can be monitored and downtime flagged immediately.</p>
-                    <div class="image-wrapper">
-                        <img src="assets/uptimerobot.png" alt="Uptime monitoring dashboard showing the bot online">
+                    <div class="image-wrapper" data-fig="viii">
+                        <img src="../assets/uptimerobot.png" alt="Uptime monitoring dashboard showing the bot online" loading="lazy" decoding="async" width="1036" height="305">
                     </div>
                     <p><i>UptimeRobot is a third-party service, not my own work.</i></p>
                 </div>
             </div>
         </div>
     </section>
-    <script>
-        const toggleButton = document.getElementById('theme-toggle');
-        const body = document.body;
-        const themeIcon = document.getElementById('theme-icon');
-    
-        // Function to toggle the theme and save preference
-        function toggleTheme() {
-            if (body.classList.contains('dark-mode')) {
-                body.classList.remove('dark-mode');
-                themeIcon.src = 'assets/moon.png';
-                localStorage.setItem('theme', 'light'); // Save preference
-            } else {
-                body.classList.add('dark-mode');
-                themeIcon.src = 'assets/sun.png';
-                localStorage.setItem('theme', 'dark'); // Save preference
-            }
-        }
-    
-        // Event listener for the theme toggle button
-        toggleButton.addEventListener('click', toggleTheme);
-    
-        // Function to apply the saved theme on page load
-        function loadTheme() {
-            const savedTheme = localStorage.getItem('theme');
-            if (savedTheme === 'dark') {
-                body.classList.add('dark-mode');
-                themeIcon.src = 'assets/sun.png';
-            } else {
-                body.classList.remove('dark-mode');
-                themeIcon.src = 'assets/moon.png';
-            }
-        }
-    
-        // Apply the saved theme when the page loads
-        document.addEventListener("DOMContentLoaded", function() {
-            loadTheme();
-    
-            // Apply Intersection Observer
-            const hiddenElements = document.querySelectorAll(".hidden");
-    
-            // Create an IntersectionObserver with rootMargin to trigger at the correct time
-            const observer = new IntersectionObserver((entries, observer) => {
-                entries.forEach((entry, index) => {
-                    if (entry.isIntersecting) {
-                        // Add a delay based on the index of the element
-                        setTimeout(() => {
-                            entry.target.classList.add('show');
-                        }, index * 150); // 150ms delay between each item
-                        observer.unobserve(entry.target); // Stop observing once element is visible
-                    }
-                });
-            }, {
-                rootMargin: '0px 0px -50px 0px', // Adjust the margin as needed to delay trigger
-                threshold: 0.1 // Trigger when 10% of the element is visible
-            });
-    
-            hiddenElements.forEach(element => {
-                observer.observe(element);
-            });
-        });
-    </script>
+
+    <script src="script.js" defer></script>
 </body>
 </html>
