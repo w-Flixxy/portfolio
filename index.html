@@ -4,23 +4,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flixxy — Discord Bot Developer</title>
-    <link rel="icon" href="assets/favicon.png" type="image/png">
+    <link rel="icon" href="../assets/favicon.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<script>
+/* Pick the theme before first paint. Deferring this to script.js would
+   render the default first and then flip, which reads as a flash.
+   Nothing is stored, so every load rolls again — including a refresh and
+   each move between pages. */
+(function () {
+  var themes = ["cyanotype", "aurora", "ink"];
+  var pick = themes[Math.random() * themes.length | 0];
+  if (pick !== "cyanotype") document.documentElement.setAttribute("data-theme", pick);
+}());
+</script>
 </head>
-<body class="dark-mode"> <!-- Default to dark mode -->
+<body>
+<!--
+THESIS: The page is a cyanotype plate. The name is a photogram — a white silhouette left where the object lay — and every section sits on exposed Prussian ground. It refuses the dark-portfolio-with-neon-accent card grid.
+OWN-WORLD: Prussian blue exposure ground, luminous pale marks, one gold-toned accent for anything interactive. Hairline registration marks and leaders, Schibsted Grotesk at one clean weight scale, evidence framed as numbered figures.
+STORY: A visitor meets the name as an exposure, reads who Flixxy is in his own words, and leaves through the contact block.
+FIRST VIEWPORT: Full-bleed Prussian ground with corner registration marks. The name set large as a photogram, the role beneath it, then the nav. Nothing else competes.
+FORM: Cyanotype Plates — the direction the roll originally assigned, built as a second site alongside the ASCII one at the user's request.
+FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance
+-->
+    <a class="skip" href="#about">Skip to content</a>
+
     <header>
         <div class="container">
-            <h1>Flixxy</h1>
-            <p>Discord Bot Developer &amp; Python Engineer</p>
-            <nav>
-                <ul>
-                    <li><a href="projects.html">Projects</a></li>
-                </ul>
-            </nav>
-            <button id="theme-toggle">
-                <img id="theme-icon" src="assets/sun.png" alt="Toggle light and dark theme">
-            </button>
+            <div class="plate">
+                <h1 class="photogram">Flixxy</h1>
+                <p class="role">Discord Bot Developer &amp; Python Engineer</p>
+                <nav>
+                    <ul>
+                        <li><a href="projects.html">Projects</a></li>
+                    </ul>
+                </nav>
+            </div>
         </div>
     </header>
 
@@ -50,7 +72,7 @@
             </div>
         </div>
     </section>
-    
+
 
     <section id="skills" class="skills hidden">
         <div class="container">
@@ -110,66 +132,7 @@
             </div>
         </div>
     </section>
-    <script>
-        const toggleButton = document.getElementById('theme-toggle');
-        const body = document.body;
-        const themeIcon = document.getElementById('theme-icon');
-    
-        // Function to toggle the theme and save preference
-        function toggleTheme() {
-            if (body.classList.contains('dark-mode')) {
-                body.classList.remove('dark-mode');
-                themeIcon.src = 'assets/moon.png';
-                localStorage.setItem('theme', 'light'); // Save preference
-            } else {
-                body.classList.add('dark-mode');
-                themeIcon.src = 'assets/sun.png';
-                localStorage.setItem('theme', 'dark'); // Save preference
-            }
-        }
-    
-        // Event listener for the theme toggle button
-        toggleButton.addEventListener('click', toggleTheme);
-    
-        // Function to apply the saved theme on page load
-        function loadTheme() {
-            const savedTheme = localStorage.getItem('theme');
-            if (savedTheme === 'dark') {
-                body.classList.add('dark-mode');
-                themeIcon.src = 'assets/sun.png';
-            } else {
-                body.classList.remove('dark-mode');
-                themeIcon.src = 'assets/moon.png';
-            }
-        }
-    
-        // Apply the saved theme when the page loads
-        document.addEventListener("DOMContentLoaded", function() {
-            loadTheme();
-    
-            // Apply Intersection Observer
-            const hiddenElements = document.querySelectorAll(".hidden");
-    
-            // Create an IntersectionObserver with rootMargin to trigger at the correct time
-            const observer = new IntersectionObserver((entries, observer) => {
-                entries.forEach((entry, index) => {
-                    if (entry.isIntersecting) {
-                        // Add a delay based on the index of the element
-                        setTimeout(() => {
-                            entry.target.classList.add('show');
-                        }, index * 150); // 150ms delay between each item
-                        observer.unobserve(entry.target); // Stop observing once element is visible
-                    }
-                });
-            }, {
-                rootMargin: '0px 0px -50px 0px', // Adjust the margin as needed to delay trigger
-                threshold: 0.1 // Trigger when 10% of the element is visible
-            });
-    
-            hiddenElements.forEach(element => {
-                observer.observe(element);
-            });
-        });
-    </script>
+
+    <script src="script.js" defer></script>
 </body>
 </html>
