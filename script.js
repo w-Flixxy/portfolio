@@ -1,18 +1,8 @@
-/* Flixxy — Cyanotype Plates
-   Card tilt, motes drifting behind the page, staggered reveals, an
-   exposure meter, figure parallax, receding sections, and a lightbox.
-   The theme is chosen inline in <head> so it lands before first paint. */
-
 (function () {
   'use strict';
 
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   document.documentElement.classList.add('has-js');
-
-  /* ── tilt ──────────────────────────────────────────────
-     The point under the cursor sits deeper in the screen, so the card
-     leans away from the hand rather than toward it. rotateX is negated
-     against the vertical axis because CSS +Y runs downward. */
 
   (function tilt() {
     if (reduced) return;
@@ -21,22 +11,20 @@
     var cards = document.querySelectorAll('.project-card, .skill-card, .price-card, .contact-card, .plate');
 
     Array.prototype.forEach.call(cards, function (card) {
-      // per-card state: a shared frame id would let one card's pending
-      // update swallow another's
+
       var frame = null, lastX = 0, lastY = 0, inside = false;
-      // the plate is far larger, so the same angle would read as a lurch
+
       var MAX = card.classList.contains('plate') ? 2.6 : 5;
 
       function apply() {
         frame = null;
-        // the pointer can leave between the move and this frame; without
-        // this the reset below gets overwritten and the card stays tilted
+
         if (!inside) return;
 
         var b = card.getBoundingClientRect();
         if (!b.width || !b.height) return;
-        var nx = (lastX - b.left) / b.width;    // 0 left -> 1 right
-        var ny = (lastY - b.top) / b.height;    // 0 top  -> 1 bottom
+        var nx = (lastX - b.left) / b.width;
+        var ny = (lastY - b.top) / b.height;
 
         card.style.setProperty('--ry', ((nx - 0.5) * 2 * MAX).toFixed(2) + 'deg');
         card.style.setProperty('--rx', (-(ny - 0.5) * 2 * MAX).toFixed(2) + 'deg');
@@ -47,7 +35,7 @@
       function reset() {
         inside = false;
         if (frame) { cancelAnimationFrame(frame); frame = null; }
-        card.classList.remove('is-tilting');    // settle on the slow ease
+        card.classList.remove('is-tilting');
         card.style.setProperty('--rx', '0deg');
         card.style.setProperty('--ry', '0deg');
       }
@@ -66,8 +54,6 @@
       card.addEventListener('pointercancel', reset);
     });
 
-    // a pointer that leaves the window entirely fires no pointerleave on
-    // some paths, so flatten anything still tilted
     document.addEventListener('pointerleave', function () {
       Array.prototype.forEach.call(cards, function (c) {
         c.classList.remove('is-tilting');
@@ -76,11 +62,6 @@
       });
     });
   }());
-
-  /* ── suspended matter ──────────────────────────────────
-     Motes in the emulsion. Each sits on one of three depth bands and
-     parallaxes at its own rate, so scrolling gives the ground distance.
-     The tint is read from the live theme, since the theme is random. */
 
   (function motes() {
     if (reduced) return;
@@ -105,11 +86,13 @@
       cv.style.width = w + 'px'; cv.style.height = h + 'px';
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-      // density follows area, so a phone does not carry a desktop count
-      var n = Math.round(Math.min(150, Math.max(40, (w * h) / 15000)));
+      var coarse = window.matchMedia('(pointer: coarse)').matches;
+      var n = coarse
+        ? Math.round(Math.min(46, Math.max(20, (w * h) / 9000)))
+        : Math.round(Math.min(150, Math.max(40, (w * h) / 15000)));
       dots = [];
       for (var i = 0; i < n; i++) {
-        var depth = 0.25 + Math.random() * 0.75;        // 0 far, 1 near
+        var depth = 0.25 + Math.random() * 0.75;
         dots.push({
           x: Math.random() * w,
           y: Math.random() * span,
@@ -145,9 +128,8 @@
         d.x += d.drift;
         if (d.x < -6) d.x = w + 6; else if (d.x > w + 6) d.x = -6;
 
-        // nearer motes travel further against the scroll
         var y = d.y - sy * d.depth * 0.62;
-        y = ((y % span) + span) % span;                 // wrap, never blank
+        y = ((y % span) + span) % span;
         if (y > h + 8) continue;
 
         ctx.globalAlpha = d.a;
@@ -160,9 +142,6 @@
     requestAnimationFrame(frame);
   }());
 
-  /* ── the plate drifts ──────────────────────────────────
-     Slower than the page, which gives the header depth. It is written to
-     a custom property so it composes with the tilt instead of fighting it. */
   (function drift() {
     if (reduced) return;
     var plate = document.querySelector('.plate');
@@ -175,15 +154,11 @@
       requestAnimationFrame(function () {
         pending = false;
         var sy = window.scrollY || 0;
-        var d = sy < 900 ? sy * 0.22 : 198;             // stops once it is gone
+        var d = sy < 900 ? sy * 0.22 : 198;
         plate.style.setProperty('--drift', d.toFixed(1) + 'px');
       });
     }, { passive: true });
   }());
-
-  /* ── scroll-linked passes ──────────────────────────────
-     One rAF-throttled reader for three effects, so the page measures
-     itself once per frame rather than three times. */
 
   (function scrollFx() {
     if (reduced) return;
@@ -207,20 +182,17 @@
 
       bar.style.transform = 'scaleX(' + (max > 0 ? Math.min(1, sy / max) : 0) + ')';
 
-      // the specimen lags the mount that carries it
       for (var i = 0; i < figs.length; i++) {
         var img = figs[i];
         var r = img.parentNode.getBoundingClientRect();
-        if (r.bottom < -120 || r.top > vh + 120) continue;      // off screen, skip
-        var mid = (r.top + r.height / 2 - vh / 2) / vh;         // -1 .. 1
+        if (r.bottom < -120 || r.top > vh + 120) continue;
+        var mid = (r.top + r.height / 2 - vh / 2) / vh;
         img.style.setProperty('--py', (mid * -22).toFixed(1) + 'px');
       }
 
-      // once a section has cleared the top it recedes instead of just leaving
       for (var j = 0; j < sections.length; j++) {
         var sec = sections[j];
-        // never touch one that has not developed in yet, or the inline value
-        // would override the reveal transition
+
         if (sec.classList.contains('hidden') && !sec.classList.contains('show')) continue;
 
         var b = sec.getBoundingClientRect();
@@ -246,9 +218,6 @@
     update();
   }());
 
-  /* ── lightbox ──────────────────────────────────────────
-     Figures open full size. Focus returns to whichever figure opened it. */
-
   (function lightbox() {
     var shots = document.querySelectorAll('.image-wrapper img');
     if (!shots.length) return;
@@ -268,8 +237,6 @@
 
     var frame = lb.querySelector('.lb__frame');
 
-    // built here and only inserted once it has a real source: an <img>
-    // parked in the DOM with no src is a broken-image box waiting to paint
     var img = document.createElement('img');
     img.className = 'lb__img';
     img.alt = '';
@@ -298,7 +265,7 @@
     }
 
     Array.prototype.forEach.call(shots, function (el) {
-      // the figure becomes a real control, so it is reachable by keyboard
+
       el.tabIndex = 0;
       el.setAttribute('role', 'button');
       el.setAttribute('aria-label', 'Enlarge: ' + (el.alt || 'figure'));
@@ -316,14 +283,11 @@
     document.addEventListener('keydown', function (e) {
       if (lb.dataset.open !== 'true') return;
       if (e.key === 'Escape') close();
-      // only one control inside, so keep focus on it
+
       if (e.key === 'Tab') { e.preventDefault(); closeBtn.focus(); }
     });
   }());
 
-  /* ── developing ────────────────────────────────────────
-     Each section resolves out of blur once, then is left alone. */
-  // each card learns its position in the row, for the staggered arrival
   Array.prototype.forEach.call(
     document.querySelectorAll('.project-grid, .skills-grid, .services-grid'),
     function (grid) {
