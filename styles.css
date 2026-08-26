@@ -1,353 +1,473 @@
-/* General Reset */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+:root {
+  --bg:     #071a2b;
+  --panel:  #0a2437;
+  --fg:     #cfe3ef;
+  --dim:    #8fb2ca;
+  --strong: #f4fafd;
+  --accent: #e8b04b;
+  --rule:   rgba(207, 227, 239, .22);
+  --bloom:  0 0 14px rgba(244, 250, 253, .40), 0 0 46px rgba(138, 190, 226, .34), 0 0 108px rgba(84, 148, 200, .24), 0 0 190px rgba(60, 130, 190, .16);
+  --glow-pale:   rgba(150, 205, 240, .42);
+  --glow-accent: rgba(232, 176, 75, .50);
+  --edge-hot:    rgba(196, 230, 252, .80);
+  --face-hot:    #10314a;
+  --sheen:       rgba(160, 212, 246, .17);
+
+  --sans: "Schibsted Grotesk", system-ui, -apple-system, sans-serif;
+  --gut:  clamp(1.15rem, 4vw, 3rem);
+  --radius: 13px;
+  --ease: cubic-bezier(.16, 1, .3, 1);
 }
 
-/* Body Styles */
+
+*, *::before, *::after { box-sizing: border-box; }
+* { margin: 0; }
+
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
 body {
-    font-family: 'Poppins', sans-serif;
-    line-height: 1.6;
-    background-color: #f4f4f4;
-    color: #333;
-    transition: background-color 0.3s, color 0.3s;
+  background: var(--ground, var(--bg));
+  background-attachment: fixed;
+  color: var(--fg);
+  font-family: var(--sans);
+  font-weight: 400;
+  font-size: clamp(1rem, .95rem + .25vw, 1.09rem);
+  line-height: 1.72;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color .5s var(--ease), color .5s var(--ease);
 }
 
-/* Dark Mode Styles */
-body.dark-mode {
-    background-color: #121212;
-    color: #e0e0e0;
+img { max-width: 100%; height: auto; display: block; }
+a { color: inherit; }
+
+
+
+/* ── browser surfaces ──────────────────────────────────── */
+::selection { background: var(--accent); color: var(--bg); }
+:root { accent-color: var(--accent); caret-color: var(--accent); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+
+* { scrollbar-width: thin; scrollbar-color: var(--rule) transparent; }
+::-webkit-scrollbar { width: 11px; height: 11px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--rule); border-radius: 0; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+.skip {
+  position: fixed; top: 0; left: 0; z-index: 90;
+  transform: translateY(-120%);
+  background: var(--accent); color: var(--bg);
+  padding: .8rem 1.3rem; text-decoration: none; font-weight: 500;
+}
+.skip:focus { transform: translateY(0); }
+
+.container { max-width: 1120px; margin: 0 auto; padding: 0 var(--gut); }
+
+/* ── the plate ─────────────────────────────────────────── */
+header { padding: clamp(1.4rem, 3vw, 2.25rem) 0 clamp(.4rem, 1.2vw, .9rem); }
+
+.plate {
+  position: relative;
+  padding: clamp(2.25rem, 5vw, 3.6rem) clamp(1.25rem, 4vw, 3.5rem);
+  min-height: min(46svh, 370px);
+  display: flex; flex-direction: column; justify-content: center;
+  border: 1px solid var(--rule);
+  background: var(--panel);
+}
+.plate--sub { min-height: 0; padding-block: clamp(1.9rem, 4vw, 2.9rem); }
+
+
+/* the name as a photogram: the white shape left where the object lay */
+.photogram {
+  font-size: clamp(2.6rem, 1.2rem + 6vw, 6rem);
+  font-weight: 700;
+  letter-spacing: -.035em;
+  line-height: .98;
+  color: var(--strong);
+  text-shadow: var(--bloom);
+}
+.role {
+  margin-top: clamp(.9rem, 2vw, 1.4rem);
+  color: var(--dim);
+  font-size: clamp(1rem, .95rem + .35vw, 1.25rem);
+  max-width: 46ch;
 }
 
-body.dark-mode header {
-    background: linear-gradient(to right, #841dce, #4e02b16b);
+nav { margin-top: clamp(2rem, 4vw, 3rem); }
+nav ul { list-style: none; padding: 0; display: flex; gap: 1.75rem; flex-wrap: wrap; }
+nav a {
+  text-decoration: none; color: var(--strong);
+  font-weight: 500;
+  padding-bottom: .3em;
+  border-bottom: 1px solid var(--rule);
+  transition: color .3s var(--ease), border-color .3s var(--ease);
+}
+nav a:hover { color: var(--accent); border-color: var(--accent); }
+
+
+/* ── the sheet ─────────────────────────────────────────────
+   The grain is the tooth of the coated paper. It stays under the
+   content, which keeps its own layer. */
+body::after {
+  content: ""; position: fixed; inset: 0;
+  z-index: 0; pointer-events: none; opacity: .05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+header, section { position: relative; z-index: 1; }
+
+/* the plate carries the uneven wash of a hand-coated sheet, and enough
+   shadow to sit above the ground rather than on it */
+.plate {
+  box-shadow: 0 34px 80px -46px rgba(0, 0, 0, .75);
+}
+.plate::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(118% 92% at 26% 16%, rgba(104, 172, 219, .17), transparent 60%),
+    radial-gradient(90% 80% at 88% 96%, rgba(4, 14, 26, .30), transparent 64%);
+}
+.plate > * { position: relative; z-index: 1; }
+
+
+/* ── sections ──────────────────────────────────────────── */
+section { padding: clamp(2.25rem, 4.2vw, 3.5rem) 0; }
+
+h2 {
+  display: flex; align-items: baseline; gap: 1.25rem;
+  font-size: clamp(1.3rem, 1.05rem + 1vw, 1.9rem);
+  font-weight: 600; letter-spacing: -.02em;
+  color: var(--strong);
+  margin-bottom: clamp(1.15rem, 2.2vw, 1.7rem);
+}
+h2::after { content: ""; flex: 1; height: 1px; background: var(--rule); }
+h2 a { text-decoration: none; color: inherit; }
+h2 a:hover { color: var(--accent); }
+
+h3 {
+  font-size: 1.16rem; font-weight: 600;
+  letter-spacing: -.012em; color: var(--strong);
+}
+p { max-width: 68ch; }
+
+/* ── plates within plates: cards get a mount ───────────── */
+.project-card, .skill-card, .price-card, .contact-card {
+  position: relative;
+  display: block;
+  padding: clamp(1.4rem, 3vw, 2rem);
+  border: 1px solid var(--rule);
+  background: var(--panel);
+  text-decoration: none; color: inherit;
+  transition: border-color .35s var(--ease), transform .35s var(--ease);
+}
+/* the inner hairline is the mount the specimen sits inside */
+.project-card::before, .skill-card::before, .price-card::before, .contact-card::before {
+  content: ""; position: absolute; inset: 7px;
+  border: 1px solid var(--rule); opacity: .5;
+  pointer-events: none;
+  transition: opacity .35s var(--ease);
 }
 
-body.dark-mode section h2 {
-    color: #dbdbdb;
-}
+.project-card p, .price-card p { color: var(--dim); margin-top: .7rem; }
 
-body.dark-mode .project-card,
-body.dark-mode .skill-card,
-body.dark-mode .contact-card,
-body.dark-mode .price-card,
-body.dark-mode .T-Security-card {
-    background-color: #1e1e1e;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    max-width: 800px;
+/* ── grids ─────────────────────────────────────────────── */
+.project-grid, .services-grid {
+  display: grid; gap: clamp(1rem, 2.2vw, 1.5rem);
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
 }
-
-body.dark-mode .contact-list li a {
-    color: #e0e0e0; /* Light color for dark mode */
-}
-
-body.dark-mode #theme-icon {
-    content: url('assets/sun.png');
-}
-
-body:not(.dark-mode) #theme-icon {
-    content: url('assets/moon.png');
-}
-
-/* Container */
-.container {
-    width: 80%;
-    margin: 0 auto; /* Center the container */
-    padding: 20px;
-}
-
-/* Header */
-header {
-    background: linear-gradient(to right, #c38af1, #926ecc);
-    color: #fff;
-    padding: 20px 0;
-    text-align: center;
-    position: relative;
-}
-
-header h1 {
-    font-size: 3em;
-    margin-bottom: 10px;
-}
-
-header p {
-    font-size: 1.2em;
-}
-
-header nav ul {
-    padding-top: 40px;
-    list-style: none;
-}
-
-header nav ul li {
-    display: inline;
-    margin: 0 10px;
-}
-
-header nav ul li a {
-    color: #fff;
-    text-decoration: none;
-    font-weight: 600;
-}
-
-header nav ul li a:hover {
-    text-decoration: underline;
-}
-
-/* Ensure smooth transitions for the theme toggle icon */
-#theme-toggle {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    transition: color 0.3s;
-}
-
-/* Transition for the project cards */
-.project-card, .skill-card, .contact-card, .price-card {
-    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease;
-}
-
-/* Sections */
-section {
-    padding: 30px 0;
-}
-
-section h2 {
-    text-align: center;
-    margin-bottom: 30px;
-    font-size: 2.5em;
-    color: #6a0dad;
-}
-
-.about p {
-    text-align: center;
-    max-width: 600px;
-    margin: 0 auto;
-    font-size: 1.2em;
-}
-
-/* Projects */
-.project-grid {
-    display: flex; /* Use flexbox layout */
-    flex-direction: column; /* Stack items vertically */
-    align-items: center; /* Center items horizontally within the container */
-    gap: 20px; /* Space between items */
-}
-
-.project-card {
-    background-color: #fff;
-    padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    text-align: center;
-    text-decoration: none;
-    color: inherit;
-    width: 100%;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.project-card h3, .T-Security-card h3 {
-    font-size: 1.6em;
-    color: #333;
-    margin: 10px 0; /* Margins around the heading */
-}
-
-.project-card p {
-    font-size: 1em;
-    margin: 0; /* Remove default margins for better control */
-    flex: 1; /* Allow paragraph to grow or shrink */
-}
-
-/* Remove underline and set color for the Projects link in light mode */
-.projects-link {
-    color: #6a0dad; /* Blue color for light mode */
-    text-decoration: none; /* Remove underline */
-    transition: color 0.3s; /* Smooth transition for hover effect */
-}
-
-/* Hover effect for the Projects link */
-.projects-link:hover {
-    text-decoration: underline; /* Underline on hover */
-    color: #6a0dad; /* Darker blue on hover */
-}
-
-/* Dark mode styles for the Projects link */
-body.dark-mode .projects-link {
-    color: #e0e0e0; /* Bright blue for dark mode */
-}
-
-body.dark-mode .projects-link:hover {
-    color: #e0e0e0; /* Darker blue for dark mode hover */
-}
-
-body.dark-mode .project-card h3, body.dark-mode .T-Security-card h3 {
-    color: #e0e0e0;
-}
-
-.project-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-}
-
-/* Skills */
 .skills-grid {
-    display: flex; /* Use flexbox layout */
-    flex-wrap: wrap; /* Allow items to wrap to the next line */
-    justify-content: center; /* Center items horizontally */
-    gap: 20px; /* Space between items */
-    text-align: center;
-    max-width: 800px; /* Ensure a maximum width */
-    margin: 0 auto; /* Center the grid within its parent */
-    padding: 20px; /* Optional: Add padding for aesthetics */
+  display: grid; gap: clamp(1rem, 2.2vw, 1.5rem);
+  grid-template-columns: repeat(auto-fit, minmax(195px, 1fr));
 }
-
-/* Ensure skill cards are responsive */
+/* a card with no qualifier centres its title, so it does not sit high
+   with dead space under it next to the two-line cards */
 .skill-card {
-    display: block;
-    background-color: #fff;
-    padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    text-align: center;
-    text-decoration: none;
-    color: inherit;
-    width: calc(100% / 3 - 20px); /* Adjust width for 3 items in a row with gap */
-    max-width: 200px; /* Set a max-width for cards */
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex; flex-direction: column; justify-content: center;
 }
-
-.skill-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-}
-
-.price-card img {
-    padding-top: 20px;
-    text-align: center;
-    margin: 0 auto;
-}
-
-/* For smaller screens, adjust the width */
-@media (max-width: 768px) {
-    .skill-card {
-        width: calc(100% / 2 - 20px); /* Adjust for 2 items in a row */
-    }
-}
-
-@media (max-width: 480px) {
-    .skill-card {
-        width: 100%; /* Full width on very small screens */
-    }
-}
-
-/* Services */
-.services-grid {
-    display: flex;
-    flex-direction: column; /* Stack items vertically */
-    align-items: center; /* Center items horizontally within the container */
-    gap: 20px; /* Space between items */
-}
-
-.price-card p {
-    padding-top: 10px;
-}
-
-.services .price-card {
-    background-color: #fff;
-    padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    width: 100%; /* Ensure it uses full width of the container */
-    max-width: 800px;
-}
-
-.services .price-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-}
-
-body.dark-mode h3 {
-    color: #e0e0e0;
-}
-
-/* Contact */
-.contact-card {
-    background-color: #fff;
-    padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    width: 100%; /* Full width */
-    max-width: 400px; /* Set a max-width for the contact card */
-    margin: 20px auto; /* Center it with margin auto */
-}
-
-/* Remove bullets from contact list */
-.contact-list {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-    font-size: 1em;
-}
-
-.contact-list li {
-    margin-bottom: 10px;
-    white-space: nowrap;
-}
-
-.contact-list li a {
-    color: #333; /* Dark color for light mode */
-    text-decoration: none;
-    transition: color 0.3s;
-}
-
-body.dark-mode .contact-list li a {
-    color: #e0e0e0; /* Light color for dark mode */
-}
-
-.contact-list li a:hover {
-    text-decoration: underline;
-}
-
-/* Services */
-.services .negotiable {
-    text-align: center;
-    padding-top: 20px;
-}
-
-.image-wrapper {
-    display: flex; /* Use flexbox to center the image */
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
-    padding-top: 20px;
-    text-align: center;
-}
-
-/* Soften the corners on every image */
-img {
-    border-radius: 5px;
-}
-
-.image-wrapper img {
-    max-width: 100%; /* Ensure the image scales within the container */
-    height: auto; /* Maintain the aspect ratio */
-    display: block; /* Remove any extra spacing below the image */
-}
-
-/* Qualifier shown next to a skill name, e.g. "(working knowledge)" */
+.skill-card h3 { font-weight: 500; }
 .skill-note {
-    display: block;
-    margin-top: 4px;
-    font-size: 0.75em;
-    font-weight: 300;
-    opacity: 0.7;
+  display: block; color: var(--dim);
+  font-size: var(--t-sm); font-weight: 400; margin-top: .3rem;
+}
+
+.price-card p:first-of-type { color: var(--strong); margin-top: 1rem; font-weight: 500; }
+.price-card i { font-style: normal; color: var(--dim); font-size: var(--t-sm); }
+.negotiable {
+  grid-column: 1 / -1;
+  color: var(--dim); font-size: var(--t-sm); max-width: 68ch;
+}
+.negotiable i { font-style: normal; }
+
+/* ── contact ───────────────────────────────────────────── */
+.contact-card { max-width: 44rem; }
+.contact-list { list-style: none; padding: 0; display: grid; gap: .85rem; }
+.contact-list a {
+  color: var(--accent); text-decoration: none;
+  border-bottom: 1px solid var(--rule);
+  border-bottom-color: color-mix(in srgb, var(--accent) 40%, transparent);
+  transition: border-color .3s var(--ease);
+}
+.contact-list a:hover { border-color: var(--accent); }
+
+/* ── specimens: evidence framed and numbered ───────────── */
+.image-wrapper {
+  position: relative;
+  margin-top: 1.25rem;
+  padding: 10px 10px 2.4rem;
+  border: 1px solid var(--rule);
+  background: var(--bg);
+}
+.image-wrapper::after {
+  content: "Fig. " attr(data-fig);
+  position: absolute; left: 12px; bottom: .75rem;
+  font-size: var(--t-xs); font-weight: 500;
+  letter-spacing: .13em; text-transform: uppercase;
+  color: var(--dim);
+}
+/* the leader running from the figure label to the frame edge */
+.image-wrapper::before {
+  content: ""; position: absolute;
+  left: 5.4rem; right: 12px; bottom: 1.15rem;
+  height: 1px; background: var(--rule);
+}
+
+/* ── developing: sections resolve the way a print does ─── */
+.has-js .hidden {
+  opacity: 0;
+  filter: blur(8px) saturate(.45);
+  transform: translateY(10px);
+}
+.has-js .hidden.show {
+  opacity: 1; filter: none; transform: none;
+  transition: opacity 1.15s var(--ease), filter 1.15s var(--ease), transform 1.15s var(--ease);
+}
+
+/* the name exposes once on arrival */
+@keyframes expose {
+  from { opacity: 0; filter: blur(16px); letter-spacing: .05em; }
+  to   { opacity: 1; filter: none; letter-spacing: -.035em; }
+}
+.has-js .photogram { animation: expose 1.5s var(--ease) both; }
+
+
+/* ── glow pass ─────────────────────────────────────────────────
+   Asked for by the user, which overrides the usual restraint about
+   decorative halos. */
+h2 { text-shadow: 0 0 30px var(--glow-pale); }
+h3 { text-shadow: 0 0 22px var(--glow-pale); }
+.role { text-shadow: 0 0 26px var(--glow-pale); }
+
+.plate {
+  box-shadow: 0 34px 80px -46px rgba(0, 0, 0, .75),
+              0 0 90px -30px var(--glow-pale);
+}
+
+.project-card, .skill-card, .price-card, .contact-card {
+  box-shadow: 0 0 0 0 transparent;
+  transition: border-color .35s var(--ease), transform .35s var(--ease), box-shadow .35s var(--ease);
+}
+
+
+.image-wrapper { transition: box-shadow .35s var(--ease), border-color .35s var(--ease); }
+.image-wrapper::after { text-shadow: 0 0 16px var(--glow-pale); }
+
+
+/* ── hover: the card is picked up off the table ────────────────
+   Lift, a touch of scale, and a shadow that falls away beneath it.
+   The edge cools to pale rather than going gold. */
+.project-card, .skill-card, .price-card, .contact-card {
+  will-change: transform;
+  transition: transform .42s var(--ease), box-shadow .42s var(--ease),
+              border-color .42s var(--ease), background-color .42s var(--ease);
+}
+.project-card:hover, .skill-card:hover, .price-card:hover,
+.project-card:focus-visible, .skill-card:focus-visible, .price-card:focus-visible {
+  transform: translateY(-10px) scale(1.022);
+  border-color: var(--edge-hot);
+  background: var(--face-hot);
+  box-shadow:
+    0 30px 56px -22px rgba(0, 0, 0, .80),
+    0 10px 18px -12px rgba(0, 0, 0, .55),
+    0 0 62px -14px var(--glow-pale);
+}
+.project-card:hover::before, .skill-card:hover::before, .price-card:hover::before {
+  opacity: .95;
+  border-color: var(--edge-hot);
+}
+.project-card:hover h3, .skill-card:hover h3, .price-card:hover h3 { color: var(--strong); }
+
+.image-wrapper:hover {
+  border-color: var(--edge-hot);
+  box-shadow: 0 0 40px -12px var(--glow-pale);
+}
+
+/* links cool to pale on hover too */
+nav a:hover, .projects-link:hover { color: var(--strong); text-shadow: 0 0 22px var(--glow-pale); }
+.contact-list a { text-shadow: 0 0 14px var(--glow-pale); }
+.contact-list a:hover { color: var(--strong); border-color: var(--edge-hot); text-shadow: 0 0 24px var(--glow-pale); }
+
+/* ── tilt: the card leans away under the cursor ────────────────
+   The point you touch sits deeper in the screen. rotateX/rotateY are
+   driven from JS as custom properties so the lift and scale below can
+   compose with them in one transform. */
+.project-card, .skill-card, .price-card, .contact-card {
+  --rx: 0deg; --ry: 0deg; --lift: 0px; --scale: 1;
+  transform-style: preserve-3d;
+  transform:
+    perspective(1000px)
+    rotateX(var(--rx)) rotateY(var(--ry))
+    translateY(var(--lift)) scale(var(--scale));
+  border-radius: var(--radius);
+}
+.project-card:hover, .skill-card:hover, .price-card:hover,
+.project-card:focus-visible, .skill-card:focus-visible, .price-card:focus-visible {
+  --lift: -10px; --scale: 1.022;
+  transform:
+    perspective(1000px)
+    rotateX(var(--rx)) rotateY(var(--ry))
+    translateY(var(--lift)) scale(var(--scale));
+}
+/* while the pointer is on the card the tilt must track it, not lag */
+.is-tilting { transition: transform .09s linear, box-shadow .42s var(--ease),
+                          border-color .42s var(--ease), background-color .42s var(--ease) !important; }
+
+/* the sheen picks out where the light is falling */
+.project-card::after, .skill-card::after, .price-card::after {
+  content: ""; position: absolute; inset: 0;
+  border-radius: inherit; pointer-events: none;
+  opacity: 0; transition: opacity .35s var(--ease);
+  background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%),
+              var(--sheen), transparent 62%);
+}
+.project-card:hover::after, .skill-card:hover::after, .price-card:hover::after { opacity: 1; }
+
+/* ── rounded ─────────────────────────────────────────────────── */
+.project-card::before, .skill-card::before, .price-card::before, .contact-card::before {
+  border-radius: calc(var(--radius) - 6px);
+}
+.plate { border-radius: calc(var(--radius) + 3px); }
+.plate::after { border-radius: inherit; }
+.image-wrapper { border-radius: 10px; }
+.image-wrapper img { border-radius: 6px; }
+
+/* the plate leans the same way the cards do, but never lifts — it is the
+   ground the page sits on, not something you pick up. A longer perspective
+   keeps the same angle subtle across a much larger surface. */
+.plate {
+  --rx: 0deg; --ry: 0deg;
+  transform: perspective(1400px) rotateX(var(--rx)) rotateY(var(--ry));
+  transition: transform .5s var(--ease);
+}
+.plate::before {
+  content: ""; position: absolute; inset: 0;
+  border-radius: inherit; pointer-events: none; z-index: 0;
+  opacity: 0; transition: opacity .4s var(--ease);
+  background: radial-gradient(560px circle at var(--mx, 50%) var(--my, 50%),
+              var(--sheen), transparent 64%);
+}
+.plate:hover::before { opacity: 1; }
+
+/* ═══ THEMES ═══════════════════════════════════════════════════
+   Each is a token swap; nothing structural changes. :root is
+   Cyanotype, the default. */
+
+/* Aurora — teal into indigo, mint accent */
+[data-theme="aurora"] {
+  --ground: linear-gradient(155deg, #031f2b 0%, #0a3d52 40%, #25185c 100%);
+  --bg:     #062736;
+  --panel:  rgba(6, 32, 46, .70);
+  --fg:     #d3f2ea;
+  --dim:    #8fc4bd;
+  --strong: #f0fffb;
+  --accent: #7affd6;
+  --rule:   rgba(122, 255, 214, .26);
+  --bloom:  0 0 14px rgba(240, 255, 251, .36), 0 0 56px rgba(122, 255, 214, .34), 0 0 118px rgba(120, 110, 255, .20);
+  --glow-pale:   rgba(122, 255, 214, .34);
+  --glow-accent: rgba(122, 255, 214, .40);
+  --edge-hot:    rgba(168, 255, 232, .80);
+  --face-hot:    rgba(10, 48, 68, .88);
+  --sheen:       rgba(122, 255, 214, .14);
+}
+
+
+/* Ink — Graphite inverted: the same greyscale, dark ground */
+[data-theme="ink"] {
+  --ground: linear-gradient(180deg, #0a0b0d 0%, #131519 100%);
+  --bg:     #0c0d10;
+  --panel:  #16181c;
+  --fg:     #e2e4e8;
+  --dim:    #9aa0a8;
+  --strong: #fbfcfd;
+  --accent: #cfd4da;
+  --rule:   rgba(226, 228, 232, .18);
+  /* a dark ground can carry halation, which the light one could not */
+  --bloom:  0 0 14px rgba(251, 252, 253, .30), 0 0 54px rgba(200, 208, 218, .20);
+  --glow-pale:   rgba(226, 228, 232, .20);
+  --glow-accent: rgba(226, 228, 232, .24);
+  --edge-hot:    rgba(242, 244, 247, .58);
+  --face-hot:    #1d2025;
+  --sheen:       rgba(255, 255, 255, .06);
+}
+/* the default wash is Cyanotype's blue; Ink stays neutral */
+[data-theme="ink"] .plate::after {
+  background:
+    radial-gradient(118% 92% at 26% 16%, rgba(255, 255, 255, .07), transparent 60%),
+    radial-gradient(90% 80% at 88% 96%, rgba(0, 0, 0, .34), transparent 64%);
+}
+
+/* ── the switch (not rendered: the theme is picked at random per visit.
+   Restore by putting the .themes markup back in both pages) ───────────────────────────────────────────────── */
+.themes {
+  position: fixed;
+  top: clamp(.9rem, 2.2vw, 1.6rem);
+  right: clamp(.9rem, 2.2vw, 1.6rem);
+  z-index: 20;
+  display: flex; gap: 2px; padding: 3px;
+  border: 1px solid var(--rule); border-radius: 999px;
+  background: var(--panel);
+  background: color-mix(in srgb, var(--panel) 82%, transparent);
+  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+  box-shadow: 0 8px 24px -14px rgba(0, 0, 0, .7);
+}
+.themes button {
+  font: inherit; font-size: var(--t-xs, .72rem); font-weight: 600;
+  letter-spacing: .1em; text-transform: uppercase;
+  padding: .42rem .8rem; border: 0; border-radius: 999px;
+  background: transparent; color: var(--dim); cursor: pointer;
+  transition: color .25s var(--ease), background-color .25s var(--ease);
+}
+.themes button:hover { color: var(--strong); }
+.themes button[aria-pressed="true"] {
+  color: var(--strong);
+  background: color-mix(in srgb, var(--strong) 14%, transparent);
+}
+
+/* a transition reading a token that just changed can hold the stale value,
+   so every transition is suppressed for the frame the swap lands in */
+.theme-switching, .theme-switching *,
+.theme-switching *::before, .theme-switching *::after {
+  transition: none !important;
+}
+
+/* ── responsive ────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .plate { padding-inline: clamp(1.1rem, 5vw, 1.75rem); }
+  .themes button { padding: .38rem .5rem; letter-spacing: .02em; font-size: .7rem; }
+  nav ul { gap: 1.25rem; }
+  .image-wrapper::before { left: 5rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .has-js .hidden { opacity: 1; filter: none; transform: none; }
+  .has-js .hidden.show { transition: none; }
+  .has-js .photogram { animation: none; }
+  .project-card, .skill-card, .price-card, .contact-card, .plate,
+  .project-card:hover, .skill-card:hover, .price-card:hover { transform: none; }
+  .plate::before { display: none; }
+  .project-card::after, .skill-card::after, .price-card::after { display: none; }
+  body { transition: none; }
+}
+
+@media (forced-colors: active) {
+  .project-card, .skill-card, .price-card, .contact-card, .image-wrapper { border-color: CanvasText; }
 }
